@@ -1,0 +1,33 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "stories"
+    label: "Field Stories"
+    folder: "content/stories"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Category", name: "category", widget: "select", options: ["Success Story", "Field Report", "WASH Update", "Medical Care"] }
+      - { label: "Location", name: "location", widget: "string", default: "Abuja, Nigeria" }
+      - { label: "Cover Image", name: "cover_image", widget: "image" }
+      - { label: "Summary", name: "summary", widget: "text" }
+      - { label: "Markdown Body", name: "body", widget: "markdown" }
+
+  - name: "team"
+    label: "Leadership Team"
+    folder: "content/team"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Full Name", name: "name", widget: "string" }
+      - { label: "Title / Role", name: "title", widget: "string" }
+      - { label: "Headshot Image", name: "headshot", widget: "image" }
+      - { label: "Bio", name: "bio", widget: "text" }
+      - { label: "Display Order", name: "order", widget: "number", default: 1 }
