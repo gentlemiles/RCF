@@ -4,8 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Content Manager | Ronnie Care Foundation</title>
-    <!-- Netlify Identity widget for Git Gateway authentication -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <link rel="icon" type="image/svg+xml" href="https://lh3.googleusercontent.com/aida-public/AB6AXuB2GPSvIQT5Gdh1OFt8ObXlrUchuZGyZAiYIuN1ob74Lv0Oen_p_41NW_zITs1qbXrJKUcHngZQB-s1bkFka8hsiCamhjdZGie61qy70xGgPVWPehjTmeN-cj_sfjXKOpv_AG6v7Hy7l5NNIfhORnkE-MDWFzqGt7C18DAOt06JBWKrcQ0bCHw9p9qvTaoV4Z0d7UWxxoLW4SJBra-VSeTiQjjp7GUvW1O2oJZ4YFH2KjYVYnLgVihSBjVrh0guGpYYCg" />
     <style>
       body {
@@ -15,18 +13,6 @@
     </style>
   </head>
   <body>
-    <!-- Decap CMS Core -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-    <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", function(user) {
-          if (!user) {
-            window.netlifyIdentity.on("login", function() {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      }
-    </script>
   </body>
 </html>
