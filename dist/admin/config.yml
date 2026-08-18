@@ -5,10 +5,91 @@ backend:
   base_url: https://netlify-cms-github-oauth-provider-rho.vercel.app
   auth_endpoint: auth
 
+publish_mode: editorial_workflow
+
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - file: "src/content/pages/home.json"
+        label: "Home Page"
+        name: "home"
+        fields:
+          - { label: "Location Badge", name: "location_badge", widget: "string", default: "Abuja, Nigeria" }
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
+          - { label: "Hero Image", name: "hero_image", widget: "image" }
+          - { label: "Hero Stat Value", name: "hero_stat_value", widget: "string", default: "10k+" }
+          - { label: "Hero Stat Label", name: "hero_stat_label", widget: "string", default: "Lives Touched" }
+          - label: "Impact Metrics"
+            name: "metrics"
+            widget: "list"
+            fields:
+              - { label: "Value", name: "value", widget: "string" }
+              - { label: "Label", name: "label", widget: "string" }
+          - label: "Strategic Focus Areas"
+            name: "focus_areas"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Icon", name: "icon", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+          - label: "Featured Campaign"
+            name: "featured_campaign"
+            widget: "object"
+            fields:
+              - { label: "Badge", name: "badge", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Image", name: "image", widget: "image" }
+
+      - file: "src/content/pages/about.json"
+        label: "About Us Page"
+        name: "about"
+        fields:
+          - { label: "Hero Badge", name: "hero_badge", widget: "string", default: "About Our Foundation" }
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
+          - { label: "Hero Image", name: "hero_image", widget: "image" }
+          - { label: "Story Badge", name: "story_badge", widget: "string", default: "Our History" }
+          - { label: "Story Title", name: "story_title", widget: "string", default: "Our Story" }
+          - label: "Story Paragraphs"
+            name: "story_paragraphs"
+            widget: "list"
+            field: { label: "Paragraph", name: "paragraph", widget: "text" }
+          - { label: "Vision Title", name: "vision_title", widget: "string", default: "Our Vision" }
+          - { label: "Vision Text", name: "vision_text", widget: "text" }
+          - { label: "Mission Title", name: "mission_title", widget: "string", default: "Our Mission" }
+          - { label: "Mission Text", name: "mission_text", widget: "text" }
+
+      - file: "src/content/pages/wash.json"
+        label: "WASH Initiatives Page"
+        name: "wash"
+        fields:
+          - { label: "Hero Badge", name: "hero_badge", widget: "string", default: "Sustainable WASH Infrastructure" }
+          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
+          - { label: "Hero Image", name: "hero_image", widget: "image" }
+          - { label: "Cert Title", name: "cert_title", widget: "string", default: "Water Quality" }
+          - { label: "Cert Subtitle", name: "cert_subtitle", widget: "string", default: "WHO Standard Certified" }
+          - label: "Impact Stats"
+            name: "stats"
+            widget: "list"
+            fields:
+              - { label: "Value", name: "value", widget: "string" }
+              - { label: "Label", name: "label", widget: "string" }
+          - label: "WASH Pillars"
+            name: "pillars"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Icon", name: "icon", widget: "string" }
+              - { label: "Stat Badge", name: "stat", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+
   - name: "stories"
     label: "Field Stories"
     folder: "content/stories"

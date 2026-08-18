@@ -1,37 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import washData from '../content/pages/wash.json';
 
 export default function Wash() {
-  const pillars = [
-    {
-      title: 'Solar-Powered Clean Water Boreholes',
-      icon: 'water_drop',
-      description:
-        'Tapping deep, pure aquifers using solar submersible pumps to provide reliable, continuous clean water to remote settlements without electrical grid access.',
-      stat: '100% Solar-Powered',
-    },
-    {
-      title: 'School Sanitation & Hygiene Stations',
-      icon: 'wash',
-      description:
-        'Constructing modern multi-tap handwashing facilities and gender-separated ventilated pit latrines across primary and secondary schools in rural districts.',
-      stat: '15+ School Hubs',
-    },
-    {
-      title: 'Menstrual Hygiene & Dignity Support',
-      icon: 'female',
-      description:
-        'Supplying reusable hygiene kits, safe disposal units, and dignified washrooms to ensure girls attend school without disruption or stigma.',
-      stat: '3,500+ Girls Reached',
-    },
-    {
-      title: 'Community WASH Governance (WASHCOM)',
-      icon: 'groups',
-      description:
-        'Establishing community-led maintenance committees, training local pump caretakers, and instituting routine microbial water quality testing.',
-      stat: '98% Uptime',
-    },
-  ];
+  const data = washData || {};
 
   return (
     <div className="flex flex-col">
@@ -41,13 +13,15 @@ export default function Wash() {
           <div className="flex flex-col gap-6 z-10">
             <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-4 py-1.5 rounded-full w-fit">
               <span className="material-symbols-outlined text-sm">water_full</span>
-              <span className="font-label-sm text-label-sm font-semibold">Sustainable WASH Infrastructure</span>
+              <span className="font-label-sm text-label-sm font-semibold">
+                {data.hero_badge || 'Sustainable WASH Infrastructure'}
+              </span>
             </div>
             <h1 className="text-display-lg font-display-lg text-primary leading-tight md:text-display-lg text-headline-lg-mobile font-bold">
-              Clean Water. Dignified Sanitation. Healthier Generations.
+              {data.hero_title || 'Clean Water. Dignified Sanitation. Healthier Generations.'}
             </h1>
             <p className="text-body-lg font-body-lg text-on-surface-variant leading-relaxed max-w-lg">
-              Access to safe water and sanitation is foundational to reducing child mortality, advancing girls' education, and unlocking economic vitality in Nigerian communities.
+              {data.hero_subtitle || 'Access to safe water and sanitation is foundational to reducing child mortality, advancing girls\' education, and unlocking economic vitality in Nigerian communities.'}
             </p>
             <div className="flex flex-wrap gap-4 mt-2">
               <Link
@@ -69,15 +43,19 @@ export default function Wash() {
             <img
               alt="Solar-powered clean water pump in village"
               className="w-full h-full object-cover"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3mK85tr6YNdzrZ0Ch0Xk7n7bEXjWR_FfrpSyiq-8RSlxLI-kyHmtjrOHBeU1DmM5y6HnYen2SwQRtDMLP5FxeStdTIK_JYLrW5iMd0hyJ_jKI20rl4fSYoBiD6Bl_VxLOpBFyOykb2Iy9nNwb_VqDErF9dPyvrbDJhqO9CzLptZHJdalRmQERnhw1AxmdQF3CcSbleIQ7O4NkfOLGO_OJtiMWdwnab7XMf7BpjGXCUCBCanbmC8qo"
+              src={data.hero_image || 'https://lh3.googleusercontent.com/aida-public/AB6AXuA3mK85tr6YNdzrZ0Ch0Xk7n7bEXjWR_FfrpSyiq-8RSlxLI-kyHmtjrOHBeU1DmM5y6HnYen2SwQRtDMLP5FxeStdTIK_JYLrW5iMd0hyJ_jKI20rl4fSYoBiD6Bl_VxLOpBFyOykb2Iy9nNwb_VqDErF9dPyvrbDJhqO9CzLptZHJdalRmQERnhw1AxmdQF3CcSbleIQ7O4NkfOLGO_OJtiMWdwnab7XMf7BpjGXCUCBCanbmC8qo'}
             />
             <div className="absolute bottom-6 left-6 glass-panel p-4 rounded-xl shadow-lg flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-primary-container text-white flex items-center justify-center">
                 <span className="material-symbols-outlined text-xl">verified</span>
               </div>
               <div>
-                <p className="text-xs text-on-surface-variant font-medium">Water Quality</p>
-                <p className="text-sm font-bold text-primary">WHO Standard Certified</p>
+                <p className="text-xs text-on-surface-variant font-medium">
+                  {data.cert_title || 'Water Quality'}
+                </p>
+                <p className="text-sm font-bold text-primary">
+                  {data.cert_subtitle || 'WHO Standard Certified'}
+                </p>
               </div>
             </div>
           </div>
@@ -87,22 +65,12 @@ export default function Wash() {
       {/* Verified Metrics Banner */}
       <section className="bg-primary px-margin-mobile md:px-margin-desktop py-12 text-white">
         <div className="max-w-container-max mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/20">
-          <div className="flex flex-col gap-1 pt-4 md:pt-0">
-            <span className="font-display-lg text-display-lg text-white font-extrabold">15+</span>
-            <span className="font-label-sm text-label-sm text-primary-fixed-dim uppercase tracking-wider">Solar Stations</span>
-          </div>
-          <div className="flex flex-col gap-1 pt-4 md:pt-0">
-            <span className="font-display-lg text-display-lg text-white font-extrabold">45k+</span>
-            <span className="font-label-sm text-label-sm text-primary-fixed-dim uppercase tracking-wider">Liters Daily</span>
-          </div>
-          <div className="flex flex-col gap-1 pt-4 md:pt-0">
-            <span className="font-display-lg text-display-lg text-white font-extrabold">80%</span>
-            <span className="font-label-sm text-label-sm text-primary-fixed-dim uppercase tracking-wider">Disease Reduction</span>
-          </div>
-          <div className="flex flex-col gap-1 pt-4 md:pt-0">
-            <span className="font-display-lg text-display-lg text-white font-extrabold">12k+</span>
-            <span className="font-label-sm text-label-sm text-primary-fixed-dim uppercase tracking-wider">Students Reached</span>
-          </div>
+          {data?.stats?.map((stat, idx) => (
+            <div key={idx} className="flex flex-col gap-1 pt-4 md:pt-0">
+              <span className="font-display-lg text-display-lg text-white font-extrabold">{stat.value}</span>
+              <span className="font-label-sm text-label-sm text-primary-fixed-dim uppercase tracking-wider">{stat.label}</span>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -121,7 +89,7 @@ export default function Wash() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {pillars.map((pillar, idx) => (
+          {data?.pillars?.map((pillar, idx) => (
             <div
               key={idx}
               className="bg-surface-container-lowest p-8 rounded-xl border border-surface-variant shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
@@ -130,7 +98,7 @@ export default function Wash() {
                 <div className="flex items-center justify-between mb-6">
                   <div className="w-14 h-14 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary">
                     <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
-                      {pillar.icon}
+                      {pillar.icon || 'water_drop'}
                     </span>
                   </div>
                   <span className="bg-primary-fixed text-on-primary-fixed font-label-sm text-xs px-3 py-1 rounded-full font-semibold">

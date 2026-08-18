@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import aboutData from '../content/pages/about.json';
 
 export default function About() {
+  const data = aboutData || {};
+
   const leadershipTeam = [
     {
       name: 'Dr. Amina Bello',
@@ -30,13 +33,15 @@ export default function About() {
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-20 md:py-28 grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
           <div className="z-10 flex flex-col gap-6">
             <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-3 py-1 rounded-full w-fit">
-              <span className="font-label-sm text-label-sm font-semibold">About Our Foundation</span>
+              <span className="font-label-sm text-label-sm font-semibold">
+                {data.hero_badge || 'About Our Foundation'}
+              </span>
             </div>
             <h1 className="text-display-lg font-display-lg text-primary md:text-display-lg md:font-display-lg text-headline-lg-mobile font-headline-lg-mobile leading-tight">
-              Dedicated to advancing healthcare and WASH initiatives across Nigerian communities.
+              {data.hero_title || 'Dedicated to advancing healthcare and WASH initiatives across Nigerian communities.'}
             </h1>
             <p className="text-body-lg font-body-lg text-on-surface-variant max-w-lg leading-relaxed">
-              We believe that access to basic healthcare and clean water is a fundamental human right. Our mission is to bridge the gap and deliver sustainable solutions to those who need them most.
+              {data.hero_subtitle || 'We believe that access to basic healthcare and clean water is a fundamental human right. Our mission is to bridge the gap and deliver sustainable solutions to those who need them most.'}
             </p>
             <div className="flex flex-wrap gap-4 mt-2">
               <a
@@ -57,7 +62,7 @@ export default function About() {
             <img
               alt="Healthcare workers in community"
               className="absolute inset-0 w-full h-full object-cover"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKc7SJg8OpeyMbZpS57ZhQvpi0BU5xiK06f_RNYaHROgRg8kYc1CbEUxvMHiFjUu0qhKQfYLN1C0jDgAcgVZUQr6nN4QBgemtrxrDGv78usHcrp4W6b4QkTumI9ZyhBWIZZQ8Ue1Z3M5ok2ABtL1av3AFB1pgttyhPctVbjHOwhWpod9xFOXRETs2EAfxU6x7BhCgJqlSx9uoZbUlNwxZPxEkn4jnneLWFLU7dkPutGxD1Wnj2Y4gb"
+              src={data.hero_image || 'https://lh3.googleusercontent.com/aida-public/AB6AXuDKc7SJg8OpeyMbZpS57ZhQvpi0BU5xiK06f_RNYaHROgRg8kYc1CbEUxvMHiFjUu0qhKQfYLN1C0jDgAcgVZUQr6nN4QBgemtrxrDGv78usHcrp4W6b4QkTumI9ZyhBWIZZQ8Ue1Z3M5ok2ABtL1av3AFB1pgttyhPctVbjHOwhWpod9xFOXRETs2EAfxU6x7BhCgJqlSx9uoZbUlNwxZPxEkn4jnneLWFLU7dkPutGxD1Wnj2Y4gb'}
             />
           </div>
         </div>
@@ -69,18 +74,17 @@ export default function About() {
       <section id="our-story" className="py-24 bg-surface max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full scroll-mt-24">
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-3 py-1 rounded-full w-fit mb-6">
-            <span className="font-label-sm text-label-sm font-semibold">Our History</span>
+            <span className="font-label-sm text-label-sm font-semibold">
+              {data.story_badge || 'Our History'}
+            </span>
           </div>
           <h2 className="text-headline-lg font-headline-lg text-primary mb-8 md:text-headline-lg text-headline-lg-mobile font-bold">
-            Our Story
+            {data.story_title || 'Our Story'}
           </h2>
           <div className="text-body-md font-body-md text-on-surface-variant space-y-6 text-left leading-relaxed">
-            <p>
-              The Ronnie Care Foundation was born out of a profound need to address the systemic disparities in healthcare and sanitation access within underserved regions. What began as a localized effort to provide essential medical supplies has rapidly evolved into a comprehensive network of care, reaching numerous communities across Nigeria and West Africa.
-            </p>
-            <p>
-              Our journey has been defined by collaborative partnerships with local leaders, international health organizations, and a dedicated team of medical professionals. Together, we are building resilient health infrastructure and pioneering sustainable Water, Sanitation, and Hygiene (WASH) programs that save lives and foster long-term community well-being.
-            </p>
+            {data?.story_paragraphs?.map((p, idx) => (
+              <p key={idx}>{p}</p>
+            ))}
           </div>
         </div>
       </section>
@@ -95,9 +99,11 @@ export default function About() {
                 visibility
               </span>
             </div>
-            <h3 className="text-title-md font-title-md text-primary mb-4 font-bold">Our Vision</h3>
+            <h3 className="text-title-md font-title-md text-primary mb-4 font-bold">
+              {data.vision_title || 'Our Vision'}
+            </h3>
             <p className="text-body-md font-body-md text-on-surface-variant flex-grow leading-relaxed">
-              To create a future where equitable access to quality healthcare and clean water is universally guaranteed, empowering communities to thrive and reach their full potential without the burden of preventable diseases.
+              {data.vision_text || 'To create a future where equitable access to quality healthcare and clean water is universally guaranteed, empowering communities to thrive and reach their full potential without the burden of preventable diseases.'}
             </p>
           </div>
 
@@ -108,9 +114,11 @@ export default function About() {
                 flag
               </span>
             </div>
-            <h3 className="text-title-md font-title-md text-primary mb-4 font-bold">Our Mission</h3>
+            <h3 className="text-title-md font-title-md text-primary mb-4 font-bold">
+              {data.mission_title || 'Our Mission'}
+            </h3>
             <p className="text-body-md font-body-md text-on-surface-variant flex-grow leading-relaxed">
-              To design and implement innovative, sustainable healthcare and WASH interventions. We strive to strengthen local health systems, provide immediate relief, and deliver continuous education to foster resilient, self-sufficient communities.
+              {data.mission_text || 'To design and implement innovative, sustainable healthcare and WASH interventions. We strive to strengthen local health systems, provide immediate relief, and deliver continuous education to foster resilient, self-sufficient communities.'}
             </p>
           </div>
         </div>
