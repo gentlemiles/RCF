@@ -8,6 +8,7 @@ import Wash from './pages/Wash';
 import Stories from './pages/Stories';
 import Donate from './pages/Donate';
 import Partner from './pages/Partner';
+import DynamicPage from './pages/DynamicPage';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/stories" element={<Stories />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/partner" element={<Partner />} />
+          <Route path="/:slug" element={<DynamicPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>

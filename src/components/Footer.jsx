@@ -188,15 +188,14 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom Bar */}
+      {/* Bottom Bar with Dynamic Policy Links */}
       <div className="mt-12 pt-8 border-t border-white/10 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
         <p className="font-body-md text-body-md text-on-primary/60 text-sm">
           {copyrightText}
         </p>
         <div className="flex gap-6 text-xs text-on-primary/60">
-          <span className="hover:text-white cursor-pointer transition-colors">Privacy Policy</span>
-          <span className="hover:text-white cursor-pointer transition-colors">Terms of Service</span>
-          <span className="hover:text-white cursor-pointer transition-colors">Annual Reports</span>
+          <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+          <Link to="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
         </div>
       </div>
     </footer>

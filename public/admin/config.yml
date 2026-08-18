@@ -193,6 +193,22 @@ collections:
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
 
+  # --- DYNAMIC STANDALONE WEBPAGES (CREATE & DELETE ANY ROUTE) ---
+  - name: "custom_pages"
+    label: "Custom & Policy Pages"
+    folder: "src/content/custom-pages"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    summary: "{{fields.title}} (URL: /{{fields.slug}})"
+    fields:
+      - { label: "Page Title", name: "title", widget: "string" }
+      - { label: "URL Slug (e.g. privacy-policy, volunteer)", name: "slug", widget: "string" }
+      - { label: "Subtitle / Tagline", name: "subtitle", widget: "string", required: false }
+      - { label: "Header Banner Image", name: "header_image", widget: "image", required: false }
+      - { label: "Page Content (Rich Text / Markdown)", name: "body", widget: "markdown" }
+      - { label: "SEO Meta Description", name: "seo_description", widget: "text", required: false }
+
   # --- DYNAMIC COLLECTIONS ---
   - name: "team"
     label: "Leadership Team"
