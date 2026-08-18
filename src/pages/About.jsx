@@ -6,30 +6,11 @@ export default function About() {
   const data = aboutData || {};
 
   const storyParagraphs = data?.story_paragraphs || [
-    'The Ronnie Care Foundation was born out of a profound need to address the systemic disparities in healthcare and sanitation access within underserved regions. What began as a localized effort to provide essential medical supplies has rapidly evolved into a comprehensive network of care, reaching numerous communities across Nigeria and West Africa.',
+    'The Ronnie Care Foundation was born out of a profound need to address the systemic disparities in healthcare and sanitation access within underserved regions. What began as a localized effort to provide essential medical supplies has rapidly evolved into a comprehensive network of care, reaching numerous communities.',
     'Our journey has been defined by collaborative partnerships with local leaders, international health organizations, and a dedicated team of medical professionals. Together, we are building resilient health infrastructure and pioneering sustainable Water, Sanitation, and Hygiene (WASH) programs that save lives and foster long-term community well-being.'
   ];
 
-  const leadershipTeam = [
-    {
-      name: 'Dr. Amina Bello',
-      title: 'Executive Director',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCbsHUJoRth0RD5EptE7Btk2n0TARJIku8P6dBeuNa_g7jHevIz-ZoY_ueUQH2oPvZSN4TUULBK-cB4NPIrhBdUz1NEwl8KSTe-RSSq2hr0Ypq8JV1h6KTuJEAwUONYLiLF-GfuPeXgBpms0rm1hwYirxfSnRdtvVwpfCLryELpR8bK7KvIZE77RT_wbc3amH3SPmv3MrHAdcDLAqCl-nIEBg9NqOlI7S__libhW0odoAuIz7Et8e7t',
-      bio: 'With over 15 years in public health, Dr. Bello leads our strategic initiatives across West Africa.',
-    },
-    {
-      name: 'Samuel Ojo',
-      title: 'Director of Operations',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDvFjMPiEslAjfCSVLg4B3jaL7yHoHKsnZi2pEzBJsnIp1bu0eUC3ZqJuJ8xiMaaA99dIyevY92f72rG95IXWeqgXI0QO1FSuY7tncHPhPLc9-Ljv6_4Z5Nonh5vkir9YOdB2b3RvWO6wuf6aQvLHSpj46u0V2ROjweElBMH9IyevSZTr1KKyKrkt1X59XpwXiKqMyUn42uGveec3h-2Gsie62d-gxwRyJu5WQSIPcQ-ceeEcHfI6e-',
-      bio: 'Samuel oversees the logistics and on-ground implementation of our WASH and clinic programs.',
-    },
-    {
-      name: 'Dr. Chioma Nnadi',
-      title: 'Chief Medical Officer',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDJ90VRYxZvnvm-uesgYTFGW0wxdqpYpIjLHMbKpwPq6HJxObvV1nCKArM1SAiaABCoQMMzAMygZAkIhIKMdYtLlkeyoPobzjSM5GtMxY-LCf-8-1uaTNiwc00N4pjCzwL0L9BDb-PPCrMK9iPYfn6j2roh7_m-FE3O8LIj-2R4iiRbRCxGx4CztAtsGuLuLVDKGLYY15RFiv9-GONO_-5NB3VDr4rfPcRspVJtqHTEdyKbC93aQ_0O',
-      bio: 'Dr. Nnadi coordinates all clinical outreach and ensures standard-of-care protocols are met.',
-    },
-  ];
+  const leadershipTeam = data?.leadership_team || [];
 
   return (
     <div className="flex flex-col">
@@ -38,9 +19,7 @@ export default function About() {
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-20 md:py-28 grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
           <div className="z-10 flex flex-col gap-6">
             <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-3 py-1 rounded-full w-fit">
-              <span className="font-label-sm text-label-sm font-semibold">
-                {data.hero_badge || 'About Our Foundation'}
-              </span>
+              <span className="font-label-sm text-label-sm font-semibold">About Our Foundation</span>
             </div>
             <h1 className="text-display-lg font-display-lg text-primary md:text-display-lg md:font-display-lg text-headline-lg-mobile font-headline-lg-mobile leading-tight">
               {data.hero_title || 'Dedicated to advancing healthcare and WASH initiatives across Nigerian communities.'}
@@ -79,12 +58,10 @@ export default function About() {
       <section id="our-story" className="py-24 bg-surface max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full scroll-mt-24">
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-3 py-1 rounded-full w-fit mb-6">
-            <span className="font-label-sm text-label-sm font-semibold">
-              {data.story_badge || 'Our History'}
-            </span>
+            <span className="font-label-sm text-label-sm font-semibold">Our History</span>
           </div>
           <h2 className="text-headline-lg font-headline-lg text-primary mb-8 md:text-headline-lg text-headline-lg-mobile font-bold">
-            {data.story_title || 'Our Story'}
+            Our Story
           </h2>
           <div className="text-body-md font-body-md text-on-surface-variant space-y-6 text-left leading-relaxed">
             {storyParagraphs.map((p, idx) => {
@@ -105,11 +82,9 @@ export default function About() {
                 visibility
               </span>
             </div>
-            <h3 className="text-title-md font-title-md text-primary mb-4 font-bold">
-              {data.vision_title || 'Our Vision'}
-            </h3>
+            <h3 className="text-title-md font-title-md text-primary mb-4 font-bold">Our Vision</h3>
             <p className="text-body-md font-body-md text-on-surface-variant flex-grow leading-relaxed">
-              {data.vision || data.vision_text || 'To create a future where equitable access to quality healthcare and clean water is universally guaranteed, empowering communities to thrive and reach their full potential without the burden of preventable diseases.'}
+              {data.vision || 'To create a future where equitable access to quality healthcare and clean water is universally guaranteed, empowering communities to thrive and reach their full potential without the burden of preventable diseases.'}
             </p>
           </div>
 
@@ -120,11 +95,9 @@ export default function About() {
                 flag
               </span>
             </div>
-            <h3 className="text-title-md font-title-md text-primary mb-4 font-bold">
-              {data.mission_title || 'Our Mission'}
-            </h3>
+            <h3 className="text-title-md font-title-md text-primary mb-4 font-bold">Our Mission</h3>
             <p className="text-body-md font-body-md text-on-surface-variant flex-grow leading-relaxed">
-              {data.mission || data.mission_text || 'To design and implement innovative, sustainable healthcare and WASH interventions. We strive to strengthen local health systems, provide immediate relief, and deliver continuous education to foster resilient, self-sufficient communities.'}
+              {data.mission || 'To design and implement innovative, sustainable healthcare and WASH interventions. We strive to strengthen local health systems, provide immediate relief, and deliver continuous education to foster resilient, self-sufficient communities.'}
             </p>
           </div>
         </div>
@@ -148,13 +121,13 @@ export default function About() {
           {leadershipTeam.map((member, idx) => (
             <div
               key={idx}
-              className="group relative bg-surface-container-lowest rounded-lg border border-surface-variant shadow-sm overflow-hidden hover:shadow-md transition-all flex flex-col"
+              className="group relative bg-surface-container-lowest rounded-lg border border-surface-variant shadow-sm overflow-hidden hover:shadow-md transition-shadow flex flex-col"
             >
               <div className="h-64 bg-surface-dim overflow-hidden relative">
                 <img
                   alt={member.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  src={member.image}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  src={member.headshot || member.image}
                 />
               </div>
               <div className="p-6 flex flex-col flex-grow">

@@ -87,6 +87,15 @@ collections:
             field: { label: "Paragraph", name: "paragraph", widget: "text" }
           - { label: "Vision Statement", name: "vision", widget: "text" }
           - { label: "Mission Statement", name: "mission", widget: "text" }
+          - label: "Leadership Team"
+            name: "leadership_team"
+            widget: "list"
+            summary: "{{fields.name}} ({{fields.title}})"
+            fields:
+              - { label: "Full Name", name: "name", widget: "string" }
+              - { label: "Title / Role", name: "title", widget: "string" }
+              - { label: "Headshot Image", name: "headshot", widget: "image" }
+              - { label: "Bio", name: "bio", widget: "text" }
 
       # WASH
       - name: "wash"
@@ -208,17 +217,3 @@ collections:
       - { label: "Header Banner Image", name: "header_image", widget: "image", required: false }
       - { label: "Page Content (Rich Text / Markdown)", name: "body", widget: "markdown" }
       - { label: "SEO Meta Description", name: "seo_description", widget: "text", required: false }
-
-  # --- DYNAMIC COLLECTIONS ---
-  - name: "team"
-    label: "Leadership Team"
-    folder: "content/team"
-    create: true
-    delete: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Full Name", name: "name", widget: "string" }
-      - { label: "Title / Role", name: "title", widget: "string" }
-      - { label: "Headshot Image", name: "headshot", widget: "image" }
-      - { label: "Bio", name: "bio", widget: "text" }
-      - { label: "Display Order", name: "order", widget: "number", default: 1 }

@@ -3,9 +3,29 @@
   "hero_subtitle": "We believe that access to basic healthcare and clean water is a fundamental human right. Our mission is to bridge the gap and deliver sustainable solutions to those who need them most.",
   "hero_image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDKc7SJg8OpeyMbZpS57ZhQvpi0BU5xiK06f_RNYaHROgRg8kYc1CbEUxvMHiFjUu0qhKQfYLN1C0jDgAcgVZUQr6nN4QBgemtrxrDGv78usHcrp4W6b4QkTumI9ZyhBWIZZQ8Ue1Z3M5ok2ABtL1av3AFB1pgttyhPctVbjHOwhWpod9xFOXRETs2EAfxU6x7BhCgJqlSx9uoZbUlNwxZPxEkn4jnneLWFLU7dkPutGxD1Wnj2Y4gb",
   "story_paragraphs": [
-    "The Ronnie Care Foundation was born out of a profound need to address the systemic disparities in healthcare and sanitation access within underserved regions. What began as a localized effort to provide essential medical supplies has rapidly evolved into a comprehensive network of care, reaching numerous communities across Nigeria and West Africa.",
+    "The Ronnie Care Foundation was born out of a profound need to address the systemic disparities in healthcare and sanitation access within underserved regions. What began as a localized effort to provide essential medical supplies has rapidly evolved into a comprehensive network of care, reaching numerous communities.",
     "Our journey has been defined by collaborative partnerships with local leaders, international health organizations, and a dedicated team of medical professionals. Together, we are building resilient health infrastructure and pioneering sustainable Water, Sanitation, and Hygiene (WASH) programs that save lives and foster long-term community well-being."
   ],
   "vision": "To create a future where equitable access to quality healthcare and clean water is universally guaranteed, empowering communities to thrive and reach their full potential without the burden of preventable diseases.",
-  "mission": "To design and implement innovative, sustainable healthcare and WASH interventions. We strive to strengthen local health systems, provide immediate relief, and deliver continuous education to foster resilient, self-sufficient communities."
+  "mission": "To design and implement innovative, sustainable healthcare and WASH interventions. We strive to strengthen local health systems, provide immediate relief, and deliver continuous education to foster resilient, self-sufficient communities.",
+  "leadership_team": [
+    {
+      "name": "Dr. Amina Bello",
+      "title": "Executive Director",
+      "headshot": "https://lh3.googleusercontent.com/aida-public/AB6AXuCbsHUJoRth0RD5EptE7Btk2n0TARJIku8P6dBeuNa_g7jHevIz-ZoY_ueUQH2oPvZSN4TUULBK-cB4NPIrhBdUz1NEwl8KSTe-RSSq2hr0Ypq8JV1h6KTuJEAwUONYLiLF-GfuPeXgBpms0rm1hwYirxfSnRdtvVwpfCLryELpR8bK7KvIZE77RT_wbc3amH3SPmv3MrHAdcDLAqCl-nIEBg9NqOlI7S__libhW0odoAuIz7Et8e7t",
+      "bio": "With over 15 years in public health, Dr. Bello leads our strategic initiatives across West Africa."
+    },
+    {
+      "name": "Samuel Ojo",
+      "title": "Director of Operations",
+      "headshot": "https://lh3.googleusercontent.com/aida-public/AB6AXuDvFjMPiEslAjfCSVLg4B3jaL7yHoHKsnZi2pEzBJsnIp1bu0eUC3ZqJuJ8xiMaaA99dIyevY92f72rG95IXWeqgXI0QO1FSuY7tncHPhPLc9-Ljv6_4Z5Nonh5vkir9YOdB2b3RvWO6wuf6aQvLHSpj46u0V2ROjweElBMH9IyevSZTr1KKyKrkt1X59XpwXiKqMyUn42uGveec3h-2Gsie62d-gxwRyJu5WQSIPcQ-ceeEcHfI6e-",
+      "bio": "Samuel oversees the logistics and on-ground implementation of our WASH and clinic programs."
+    },
+    {
+      "name": "Dr. Chioma Nnadi",
+      "title": "Chief Medical Officer",
+      "headshot": "https://lh3.googleusercontent.com/aida-public/AB6AXuDJ90VRYxZvnvm-uesgYTFGW0wxdqpYpIjLHMbKpwPq6HJxObvV1nCKArM1SAiaABCoQMMzAMygZAkIhIKMdYtLlkeyoPobzjSM5GtMxY-LCf-8-1uaTNiwc00N4pjCzwL0L9BDb-PPCrMK9iPYfn6j2roh7_m-FE3O8LIj-2R4iiRbRCxGx4CztAtsGuLuLVDKGLYY15RFiv9-GONO_-5NB3VDr4rfPcRspVJtqHTEdyKbC93aQ_0O",
+      "bio": "Dr. Nnadi coordinates all clinical outreach and ensures standard-of-care protocols are met."
+    }
+  ]
 }
