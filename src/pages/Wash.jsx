@@ -21,7 +21,7 @@ export default function Wash() {
               {data.hero_title || 'Clean Water. Dignified Sanitation. Healthier Generations.'}
             </h1>
             <p className="text-body-lg font-body-lg text-on-surface-variant leading-relaxed max-w-lg">
-              {data.hero_subtitle || 'Access to safe water and sanitation is foundational to reducing child mortality, advancing girls\' education, and unlocking economic vitality in Nigerian communities.'}
+              {data.hero_description || data.hero_subtitle || 'Access to safe water and sanitation is foundational to reducing child mortality, advancing girls\' education, and unlocking economic vitality in Nigerian communities.'}
             </p>
             <div className="flex flex-wrap gap-4 mt-2">
               <Link
@@ -43,7 +43,7 @@ export default function Wash() {
             <img
               alt="Solar-powered clean water pump in village"
               className="w-full h-full object-cover"
-              src={data.hero_image || 'https://lh3.googleusercontent.com/aida-public/AB6AXuA3mK85tr6YNdzrZ0Ch0Xk7n7bEXjWR_FfrpSyiq-8RSlxLI-kyHmtjrOHBeU1DmM5y6HnYen2SwQRtDMLP5FxeStdTIK_JYLrW5iMd0hyJ_jKI20rl4fSYoBiD6Bl_VxLOpBFyOykb2Iy9nNwb_VqDErF9dPyvrbDJhqO9CzLptZHJdalRmQERnhw1AxmdQF3CcSbleIQ7O4NkfOLGO_OJtiMWdwnab7XMf7BpjGXCUCBCanbmC8qo'}
+              src={data.hero_bg_image || data.hero_image || 'https://lh3.googleusercontent.com/aida-public/AB6AXuA3mK85tr6YNdzrZ0Ch0Xk7n7bEXjWR_FfrpSyiq-8RSlxLI-kyHmtjrOHBeU1DmM5y6HnYen2SwQRtDMLP5FxeStdTIK_JYLrW5iMd0hyJ_jKI20rl4fSYoBiD6Bl_VxLOpBFyOykb2Iy9nNwb_VqDErF9dPyvrbDJhqO9CzLptZHJdalRmQERnhw1AxmdQF3CcSbleIQ7O4NkfOLGO_OJtiMWdwnab7XMf7BpjGXCUCBCanbmC8qo'}
             />
             <div className="absolute bottom-6 left-6 glass-panel p-4 rounded-xl shadow-lg flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-primary-container text-white flex items-center justify-center">
@@ -101,9 +101,11 @@ export default function Wash() {
                       {pillar.icon || 'water_drop'}
                     </span>
                   </div>
-                  <span className="bg-primary-fixed text-on-primary-fixed font-label-sm text-xs px-3 py-1 rounded-full font-semibold">
-                    {pillar.stat}
-                  </span>
+                  {pillar.stat && (
+                    <span className="bg-primary-fixed text-on-primary-fixed font-label-sm text-xs px-3 py-1 rounded-full font-semibold">
+                      {pillar.stat}
+                    </span>
+                  )}
                 </div>
                 <h3 className="text-title-md font-title-md text-primary font-bold mb-3">{pillar.title}</h3>
                 <p className="text-body-md font-body-md text-on-surface-variant leading-relaxed">

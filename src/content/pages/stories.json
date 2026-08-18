@@ -1,0 +1,51 @@
+{
+  "header_title": "Field Stories",
+  "header_subtitle": "Real stories from the communities we serve. Discover the impact of our healthcare and WASH initiatives across the globe.",
+  "featured_story": {
+    "title": "Bringing Clean Water to the Heart of the Valley",
+    "category": "Success Story",
+    "date": "October 12, 2023",
+    "location": "Plateau Valley, Nigeria",
+    "summary": "A new solar-powered well is transforming daily life for over 2,000 residents, reducing waterborne diseases by 80% in just three months.",
+    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCghJ6Y6yyZCye0pIg0CI6d65ioX--W9VtaLLDdMwgPF4tt79D4ceiEcMkWlJbHflun_DUt5x8kQSTE-UNco0kAikA3iz1Qet6KanbetEc6DsTSlEb4eAISWraFD4V4MR3i4iwfPhP-cGxN3GqDWD9FzRM3xmJheYeLw6nrZKiVmVMZ9GFO2dgSoADFKlgIdIN2AvPK5XaSDpSqfG8vGsAIwvBwYnVFhR2gpS8iVnUbvOJmYqaKkOTT",
+    "fullText": "For decades, families in the valley walked over four miles every morning to collect turbid river water. In partnership with local community leaders, Ronnie Care Foundation engineered and installed a 120-meter solar submersible borehole with multi-spout distribution. Within 90 days, local clinic admissions for dysentery and typhoid dropped by 80%. Today, the system is maintained by a 6-person elected WASHCOM committee trained by our technical staff."
+  },
+  "stories": [
+    {
+      "title": "Mobile Clinics Reach Remote Highlands",
+      "category": "Field Report",
+      "date": "October 08, 2023",
+      "location": "Northern Highlands, Nigeria",
+      "summary": "Our medical teams navigated difficult terrain to provide essential pediatric care and vaccinations to isolated communities.",
+      "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCvUKIX2rxg9GVXOLokJq0L9sACbeiugv7esVfEmf7AuBIjYX2RY435tv4er3RqFFWBAwONnKyOSsJrh2bHkpnwaQVpu5yVS-G4HGmujE5pnsAHMKAynyefnJyAumAOyaepXPnjpFZ0noaK-G3THvKWDGe4qRBPGbUWdjgOhZxnU78ijBD9eVNzoUkMKK6zrK7oejNh12AM6y8z0kN2IsoRCAEYnbw4RXIVxJR9LCggWlx0E6Locx-f",
+      "fullText": "Equipped with 4x4 mobile outreach units and portable cold-chain vaccine storage, our clinical teams delivered critical childhood immunizations, malaria rapid diagnostics, and prenatal screenings across 7 highland hamlets previously cut off from primary healthcare infrastructure."
+    },
+    {
+      "title": "Emergency Response: Flood Relief Efforts Underway",
+      "category": "WASH Update",
+      "date": "September 28, 2023",
+      "location": "Benue Basin, Nigeria",
+      "summary": "Following unprecedented rainfall, our disaster response teams have been deployed to distribute clean water kits and emergency medical supplies.",
+      "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuA3mK85tr6YNdzrZ0Ch0Xk7n7bEXjWR_FfrpSyiq-8RSlxLI-kyHmtjrOHBeU1DmM5y6HnYen2SwQRtDMLP5FxeStdTIK_JYLrW5iMd0hyJ_jKI20rl4fSYoBiD6Bl_VxLOpBFyOykb2Iy9nNwb_VqDErF9dPyvrbDJhqO9CzLptZHJdalRmQERnhw1AxmdQF3CcSbleIQ7O4NkfOLGO_OJtiMWdwnab7XMf7BpjGXCUCBCanbmC8qo",
+      "fullText": "Flash floods contaminated shallow dugouts and displaced hundreds of households. Ronnie Care mobilized within 24 hours, deploying 1,200 water purification packages, emergency oral rehydration salts, and temporary latrine sanitation stations."
+    },
+    {
+      "title": "Maternal Health Clinic Milestone in Gwarinpa",
+      "category": "Medical Care",
+      "date": "September 15, 2023",
+      "location": "Abuja, Nigeria",
+      "summary": "Over 500 expectant mothers received safe delivery kits and ultrasound screenings during our quarterly clinic outreach.",
+      "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDKc7SJg8OpeyMbZpS57ZhQvpi0BU5xiK06f_RNYaHROgRg8kYc1CbEUxvMHiFjUu0qhKQfYLN1C0jDgAcgVZUQr6nN4QBgemtrxrDGv78usHcrp4W6b4QkTumI9ZyhBWIZZQ8Ue1Z3M5ok2ABtL1av3AFB1pgttyhPctVbjHOwhWpod9xFOXRETs2EAfxU6x7BhCgJqlSx9uoZbUlNwxZPxEkn4jnneLWFLU7dkPutGxD1Wnj2Y4gb",
+      "fullText": "Safe motherhood is at the core of our primary health mandate. Through community health workers, we connected 500+ mothers to continuous antenatal care, distributed sanitized birth packs, and trained birth attendants on danger signs."
+    },
+    {
+      "title": "Hygiene Champions: School Handwashing Revolution",
+      "category": "WASH Update",
+      "date": "August 30, 2023",
+      "location": "Abuja & Surroundings",
+      "summary": "Student-led hygiene committees take the lead in maintaining new school water stations and educating peers on hand hygiene.",
+      "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCOTJ1ZQ7Gr0-A_TUgsWE1NHdbn6KZ0j9HR9-mlqIJtTqSYtbXTEXDrwsoiNEkC_yFPWC0ytmQ1_aS-9l3jI69_ma0o8VxAW6SoT1VEqN6pnY0l-BEsO2Gc0EgQVA7WaHPPUOy-B-vVI_D_VqM4aTZic1Zv4OQo5ayRKtg_7Tt6H8kApJNWJcuThMyTJ3pO4MKDBLMgknypXw7EmkR9gLR3MXlEZl3FtNTo1n44-eP6x_uGB7pOHagt",
+      "fullText": "Empowering youth ambassadors creates lasting habit change. In 5 primary schools, student hygiene champions oversee handwashing stations, monitor soap restocking, and lead creative hygiene plays during morning assemblies."
+    }
+  ]
+}

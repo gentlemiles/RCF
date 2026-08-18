@@ -1,10 +1,7 @@
 {
-  "hero_badge": "Sustainable WASH Infrastructure",
   "hero_title": "Clean Water. Dignified Sanitation. Healthier Generations.",
-  "hero_subtitle": "Access to safe water and sanitation is foundational to reducing child mortality, advancing girls' education, and unlocking economic vitality in Nigerian communities.",
-  "hero_image": "https://lh3.googleusercontent.com/aida-public/AB6AXuA3mK85tr6YNdzrZ0Ch0Xk7n7bEXjWR_FfrpSyiq-8RSlxLI-kyHmtjrOHBeU1DmM5y6HnYen2SwQRtDMLP5FxeStdTIK_JYLrW5iMd0hyJ_jKI20rl4fSYoBiD6Bl_VxLOpBFyOykb2Iy9nNwb_VqDErF9dPyvrbDJhqO9CzLptZHJdalRmQERnhw1AxmdQF3CcSbleIQ7O4NkfOLGO_OJtiMWdwnab7XMf7BpjGXCUCBCanbmC8qo",
-  "cert_title": "Water Quality",
-  "cert_subtitle": "WHO Standard Certified",
+  "hero_description": "Access to safe water and sanitation is foundational to reducing child mortality, advancing girls' education, and unlocking economic vitality in Nigerian communities.",
+  "hero_bg_image": "https://lh3.googleusercontent.com/aida-public/AB6AXuA3mK85tr6YNdzrZ0Ch0Xk7n7bEXjWR_FfrpSyiq-8RSlxLI-kyHmtjrOHBeU1DmM5y6HnYen2SwQRtDMLP5FxeStdTIK_JYLrW5iMd0hyJ_jKI20rl4fSYoBiD6Bl_VxLOpBFyOykb2Iy9nNwb_VqDErF9dPyvrbDJhqO9CzLptZHJdalRmQERnhw1AxmdQF3CcSbleIQ7O4NkfOLGO_OJtiMWdwnab7XMf7BpjGXCUCBCanbmC8qo",
   "stats": [
     {
       "value": "15+",
@@ -27,25 +24,21 @@
     {
       "title": "Solar-Powered Clean Water Boreholes",
       "icon": "water_drop",
-      "stat": "100% Solar-Powered",
       "description": "Tapping deep, pure aquifers using solar submersible pumps to provide reliable, continuous clean water to remote settlements without electrical grid access."
     },
     {
       "title": "School Sanitation & Hygiene Stations",
       "icon": "wash",
-      "stat": "15+ School Hubs",
       "description": "Constructing modern multi-tap handwashing facilities and gender-separated ventilated pit latrines across primary and secondary schools in rural districts."
     },
     {
       "title": "Menstrual Hygiene & Dignity Support",
       "icon": "female",
-      "stat": "3,500+ Girls Reached",
       "description": "Supplying reusable hygiene kits, safe disposal units, and dignified washrooms to ensure girls attend school without disruption or stigma."
     },
     {
       "title": "Community WASH Governance (WASHCOM)",
       "icon": "groups",
-      "stat": "98% Uptime",
       "description": "Establishing community-led maintenance committees, training local pump caretakers, and instituting routine microbial water quality testing."
     }
   ]

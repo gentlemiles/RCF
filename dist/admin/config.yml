@@ -6,108 +6,199 @@ backend:
   auth_endpoint: auth
 
 publish_mode: editorial_workflow
-
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  - name: "pages"
-    label: "Pages"
+  # --- GLOBAL SETTINGS ---
+  - name: "settings"
+    label: "Global Settings"
     files:
-      - file: "src/content/pages/home.json"
-        label: "Home Page"
-        name: "home"
+      - name: "general"
+        label: "Contact & Footer Info"
+        file: "src/content/settings/global.json"
         fields:
-          - { label: "Location Badge", name: "location_badge", widget: "string", default: "Abuja, Nigeria" }
-          - { label: "Hero Title", name: "hero_title", widget: "string" }
+          - { label: "Site Name", name: "site_name", widget: "string" }
+          - { label: "Foundation Email", name: "email", widget: "string" }
+          - { label: "WhatsApp Number", name: "whatsapp", widget: "string" }
+          - { label: "Headquarters Address", name: "address", widget: "text" }
+          - { label: "Mission Subtitle (Footer)", name: "footer_mission", widget: "text" }
+          - { label: "Copyright Notice", name: "copyright", widget: "string" }
+          - label: "Social Media Links"
+            name: "social_links"
+            widget: "object"
+            fields:
+              - { label: "Twitter / X URL", name: "twitter", widget: "string", required: false }
+              - { label: "LinkedIn URL", name: "linkedin", widget: "string", required: false }
+              - { label: "Facebook URL", name: "facebook", widget: "string", required: false }
+              - { label: "Instagram URL", name: "instagram", widget: "string", required: false }
+
+  # --- WEBSITE PAGES ---
+  - name: "pages"
+    label: "Website Pages"
+    files:
+      # Home
+      - name: "home"
+        label: "Home Page"
+        file: "src/content/pages/home.json"
+        fields:
+          - { label: "Location Badge", name: "location_badge", widget: "string" }
+          - { label: "Hero Headline", name: "hero_title", widget: "string" }
           - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
           - { label: "Hero Image", name: "hero_image", widget: "image" }
-          - { label: "Hero Stat Value", name: "hero_stat_value", widget: "string", default: "10k+" }
-          - { label: "Hero Stat Label", name: "hero_stat_label", widget: "string", default: "Lives Touched" }
+          - { label: "Floating Badge Stat", name: "hero_badge_stat", widget: "string" }
+          - { label: "Floating Badge Label", name: "hero_badge_label", widget: "string" }
           - label: "Impact Metrics"
             name: "metrics"
             widget: "list"
+            summary: "{{fields.stat}} - {{fields.label}}"
             fields:
-              - { label: "Value", name: "value", widget: "string" }
+              - { label: "Stat", name: "stat", widget: "string" }
               - { label: "Label", name: "label", widget: "string" }
           - label: "Strategic Focus Areas"
             name: "focus_areas"
             widget: "list"
+            summary: "{{fields.title}}"
             fields:
               - { label: "Title", name: "title", widget: "string" }
-              - { label: "Icon", name: "icon", widget: "string" }
+              - { label: "Icon Name", name: "icon", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
           - label: "Featured Campaign"
             name: "featured_campaign"
             widget: "object"
             fields:
-              - { label: "Badge", name: "badge", widget: "string" }
+              - { label: "Tag", name: "tag", widget: "string" }
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
               - { label: "Image", name: "image", widget: "image" }
+              - { label: "Link URL", name: "link_url", widget: "string" }
 
-      - file: "src/content/pages/about.json"
+      # About
+      - name: "about"
         label: "About Us Page"
-        name: "about"
+        file: "src/content/pages/about.json"
         fields:
-          - { label: "Hero Badge", name: "hero_badge", widget: "string", default: "About Our Foundation" }
           - { label: "Hero Title", name: "hero_title", widget: "string" }
           - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
           - { label: "Hero Image", name: "hero_image", widget: "image" }
-          - { label: "Story Badge", name: "story_badge", widget: "string", default: "Our History" }
-          - { label: "Story Title", name: "story_title", widget: "string", default: "Our Story" }
-          - label: "Story Paragraphs"
+          - label: "Our Story Paragraphs"
             name: "story_paragraphs"
             widget: "list"
             field: { label: "Paragraph", name: "paragraph", widget: "text" }
-          - { label: "Vision Title", name: "vision_title", widget: "string", default: "Our Vision" }
-          - { label: "Vision Text", name: "vision_text", widget: "text" }
-          - { label: "Mission Title", name: "mission_title", widget: "string", default: "Our Mission" }
-          - { label: "Mission Text", name: "mission_text", widget: "text" }
+          - { label: "Vision Statement", name: "vision", widget: "text" }
+          - { label: "Mission Statement", name: "mission", widget: "text" }
 
-      - file: "src/content/pages/wash.json"
+      # WASH
+      - name: "wash"
         label: "WASH Initiatives Page"
-        name: "wash"
+        file: "src/content/pages/wash.json"
         fields:
-          - { label: "Hero Badge", name: "hero_badge", widget: "string", default: "Sustainable WASH Infrastructure" }
           - { label: "Hero Title", name: "hero_title", widget: "string" }
-          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
-          - { label: "Hero Image", name: "hero_image", widget: "image" }
-          - { label: "Cert Title", name: "cert_title", widget: "string", default: "Water Quality" }
-          - { label: "Cert Subtitle", name: "cert_subtitle", widget: "string", default: "WHO Standard Certified" }
-          - label: "Impact Stats"
+          - { label: "Hero Description", name: "hero_description", widget: "text" }
+          - { label: "Hero Background Image", name: "hero_bg_image", widget: "image" }
+          - label: "WASH Impact Stats"
             name: "stats"
             widget: "list"
             fields:
               - { label: "Value", name: "value", widget: "string" }
               - { label: "Label", name: "label", widget: "string" }
-          - label: "WASH Pillars"
+          - label: "Core Pillars"
             name: "pillars"
             widget: "list"
+            summary: "{{fields.title}}"
             fields:
               - { label: "Title", name: "title", widget: "string" }
-              - { label: "Icon", name: "icon", widget: "string" }
-              - { label: "Stat Badge", name: "stat", widget: "string" }
+              - { label: "Icon Name", name: "icon", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
 
-  - name: "stories"
-    label: "Field Stories"
-    folder: "content/stories"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Category", name: "category", widget: "select", options: ["Success Story", "Field Report", "WASH Update", "Medical Care"] }
-      - { label: "Location", name: "location", widget: "string", default: "Abuja, Nigeria" }
-      - { label: "Cover Image", name: "cover_image", widget: "image" }
-      - { label: "Summary", name: "summary", widget: "text" }
-      - { label: "Markdown Body", name: "body", widget: "markdown" }
+      # Our Work
+      - name: "our_work"
+        label: "Our Work Page"
+        file: "src/content/pages/our-work.json"
+        fields:
+          - { label: "Header Title", name: "header_title", widget: "string" }
+          - { label: "Header Subtitle", name: "header_subtitle", widget: "text" }
+          - label: "Project Categories (Filter Tabs)"
+            name: "categories"
+            widget: "list"
+            field: { label: "Category Name", name: "name", widget: "string" }
+          - label: "Projects Grid (CRUD)"
+            name: "projects"
+            widget: "list"
+            summary: "{{fields.title}} [{{fields.category}}]"
+            fields:
+              - { label: "Project Title", name: "title", widget: "string" }
+              - { label: "Category", name: "category", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Cover Image", name: "image", widget: "image" }
+              - { label: "Details Link", name: "link_url", widget: "string", default: "/our-work" }
 
+      # Field Stories Page
+      - name: "stories_page"
+        label: "Field Stories Page"
+        file: "src/content/pages/stories.json"
+        fields:
+          - { label: "Header Title", name: "header_title", widget: "string" }
+          - { label: "Header Subtitle", name: "header_subtitle", widget: "text" }
+          - label: "Featured Story"
+            name: "featured_story"
+            widget: "object"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Badge / Category", name: "category", widget: "string" }
+              - { label: "Date", name: "date", widget: "string" }
+              - { label: "Summary", name: "summary", widget: "text" }
+              - { label: "Background Image", name: "image", widget: "image" }
+          - label: "Stories Grid (CRUD)"
+            name: "stories"
+            widget: "list"
+            summary: "{{fields.title}} [{{fields.category}}]"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Category", name: "category", widget: "string" }
+              - { label: "Date", name: "date", widget: "string" }
+              - { label: "Summary", name: "summary", widget: "text" }
+              - { label: "Cover Image", name: "image", widget: "image", required: false }
+
+      # Donation Portal
+      - name: "donate"
+        label: "Donation Portal Page"
+        file: "src/content/pages/donate.json"
+        fields:
+          - { label: "Page Title", name: "title", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "text" }
+          - label: "Impact Tiers (Breakdown)"
+            name: "impact_tiers"
+            widget: "list"
+            summary: "{{fields.amount}} - {{fields.impact}}"
+            fields:
+              - { label: "Amount (USD)", name: "amount", widget: "string" }
+              - { label: "Impact Description", name: "impact", widget: "string" }
+          - label: "Registration / Tax Exemption Notice"
+            name: "tax_notice"
+            widget: "text"
+
+      # Partnership Portal
+      - name: "partner"
+        label: "Partnership Portal Page"
+        file: "src/content/pages/partner.json"
+        fields:
+          - { label: "Page Title", name: "title", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "text" }
+          - label: "Engagement Pillars"
+            name: "pillars"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+
+  # --- DYNAMIC COLLECTIONS ---
   - name: "team"
     label: "Leadership Team"
     folder: "content/team"
     create: true
+    delete: true
     slug: "{{slug}}"
     fields:
       - { label: "Full Name", name: "name", widget: "string" }

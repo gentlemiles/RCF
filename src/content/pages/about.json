@@ -1,16 +1,11 @@
 {
-  "hero_badge": "About Our Foundation",
   "hero_title": "Dedicated to advancing healthcare and WASH initiatives across Nigerian communities.",
   "hero_subtitle": "We believe that access to basic healthcare and clean water is a fundamental human right. Our mission is to bridge the gap and deliver sustainable solutions to those who need them most.",
   "hero_image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDKc7SJg8OpeyMbZpS57ZhQvpi0BU5xiK06f_RNYaHROgRg8kYc1CbEUxvMHiFjUu0qhKQfYLN1C0jDgAcgVZUQr6nN4QBgemtrxrDGv78usHcrp4W6b4QkTumI9ZyhBWIZZQ8Ue1Z3M5ok2ABtL1av3AFB1pgttyhPctVbjHOwhWpod9xFOXRETs2EAfxU6x7BhCgJqlSx9uoZbUlNwxZPxEkn4jnneLWFLU7dkPutGxD1Wnj2Y4gb",
-  "story_badge": "Our History",
-  "story_title": "Our Story",
   "story_paragraphs": [
     "The Ronnie Care Foundation was born out of a profound need to address the systemic disparities in healthcare and sanitation access within underserved regions. What began as a localized effort to provide essential medical supplies has rapidly evolved into a comprehensive network of care, reaching numerous communities across Nigeria and West Africa.",
     "Our journey has been defined by collaborative partnerships with local leaders, international health organizations, and a dedicated team of medical professionals. Together, we are building resilient health infrastructure and pioneering sustainable Water, Sanitation, and Hygiene (WASH) programs that save lives and foster long-term community well-being."
   ],
-  "vision_title": "Our Vision",
-  "vision_text": "To create a future where equitable access to quality healthcare and clean water is universally guaranteed, empowering communities to thrive and reach their full potential without the burden of preventable diseases.",
-  "mission_title": "Our Mission",
-  "mission_text": "To design and implement innovative, sustainable healthcare and WASH interventions. We strive to strengthen local health systems, provide immediate relief, and deliver continuous education to foster resilient, self-sufficient communities."
+  "vision": "To create a future where equitable access to quality healthcare and clean water is universally guaranteed, empowering communities to thrive and reach their full potential without the burden of preventable diseases.",
+  "mission": "To design and implement innovative, sustainable healthcare and WASH interventions. We strive to strengthen local health systems, provide immediate relief, and deliver continuous education to foster resilient, self-sufficient communities."
 }

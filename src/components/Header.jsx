@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
+import globalSettings from '../content/settings/global.json';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+
+  const siteName = globalSettings?.site_name || 'Ronnie Care Foundation';
 
   const navLinks = [
     { name: 'About Us', path: '/about' },
@@ -16,9 +19,7 @@ export default function Header() {
   const handleNavClick = (path) => {
     setMobileMenuOpen(false);
     if (path.startsWith('/#')) {
-      if (location.pathname !== '/') {
-        // Will navigate to home with hash
-      } else {
+      if (location.pathname === '/') {
         const id = path.replace('/#', '');
         const elem = document.getElementById(id);
         if (elem) {
@@ -39,7 +40,7 @@ export default function Header() {
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2GPSvIQT5Gdh1OFt8ObXlrUchuZGyZAiYIuN1ob74Lv0Oen_p_41NW_zITs1qbXrJKUcHngZQB-s1bkFka8hsiCamhjdZGie61qy70xGgPVWPehjTmeN-cj_sfjXKOpv_AG6v7Hy7l5NNIfhORnkE-MDWFzqGt7C18DAOt06JBWKrcQ0bCHw9p9qvTaoV4Z0d7UWxxoLW4SJBra-VSeTiQjjp7GUvW1O2oJZ4YFH2KjYVYnLgVihSBjVrh0guGpYYCg"
           />
           <span className="font-title-md text-title-md font-bold text-primary tracking-tight hidden sm:block">
-            Ronnie Care Foundation
+            {siteName}
           </span>
         </Link>
 

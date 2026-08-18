@@ -67,10 +67,10 @@ export default function Home() {
               </div>
               <div>
                 <div className="font-title-md text-title-md font-bold text-primary">
-                  {data.hero_stat_value || '10k+'}
+                  {data.hero_badge_stat || data.hero_stat_value || '10k+'}
                 </div>
                 <div className="font-label-sm text-label-sm text-secondary font-semibold">
-                  {data.hero_stat_label || 'Lives Touched'}
+                  {data.hero_badge_label || data.hero_stat_label || 'Lives Touched'}
                 </div>
               </div>
             </div>
@@ -84,7 +84,7 @@ export default function Home() {
           {data?.metrics?.map((metric, idx) => (
             <div key={idx} className="flex flex-col gap-2 pt-4 md:pt-0">
               <span className="font-display-lg text-display-lg text-white font-extrabold tracking-tight">
-                {metric.value}
+                {metric.stat || metric.value}
               </span>
               <span className="font-label-sm text-label-sm text-primary-fixed-dim uppercase tracking-wider">
                 {metric.label}
@@ -135,7 +135,7 @@ export default function Home() {
             <div className="lg:w-1/2 p-8 md:p-12 flex flex-col justify-center">
               <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-3 py-1 rounded-full w-fit mb-6">
                 <span className="font-label-sm text-label-sm font-semibold">
-                  {data.featured_campaign.badge || 'WASH Project'}
+                  {data.featured_campaign.tag || data.featured_campaign.badge || 'WASH Project'}
                 </span>
               </div>
               <h2 className="font-headline-lg text-headline-lg text-primary mb-4 md:text-headline-lg text-headline-lg-mobile">
@@ -146,7 +146,7 @@ export default function Home() {
               </p>
               <div>
                 <Link
-                  to="/stories"
+                  to={data.featured_campaign.link_url || '/stories'}
                   className="font-label-sm text-label-sm text-secondary inline-flex items-center gap-2 hover:opacity-80 transition-opacity font-semibold"
                 >
                   Read Full Story <span className="material-symbols-outlined text-sm">arrow_forward</span>

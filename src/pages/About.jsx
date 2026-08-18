@@ -5,6 +5,11 @@ import aboutData from '../content/pages/about.json';
 export default function About() {
   const data = aboutData || {};
 
+  const storyParagraphs = data?.story_paragraphs || [
+    'The Ronnie Care Foundation was born out of a profound need to address the systemic disparities in healthcare and sanitation access within underserved regions. What began as a localized effort to provide essential medical supplies has rapidly evolved into a comprehensive network of care, reaching numerous communities across Nigeria and West Africa.',
+    'Our journey has been defined by collaborative partnerships with local leaders, international health organizations, and a dedicated team of medical professionals. Together, we are building resilient health infrastructure and pioneering sustainable Water, Sanitation, and Hygiene (WASH) programs that save lives and foster long-term community well-being.'
+  ];
+
   const leadershipTeam = [
     {
       name: 'Dr. Amina Bello',
@@ -82,9 +87,10 @@ export default function About() {
             {data.story_title || 'Our Story'}
           </h2>
           <div className="text-body-md font-body-md text-on-surface-variant space-y-6 text-left leading-relaxed">
-            {data?.story_paragraphs?.map((p, idx) => (
-              <p key={idx}>{p}</p>
-            ))}
+            {storyParagraphs.map((p, idx) => {
+              const text = typeof p === 'string' ? p : p?.paragraph || '';
+              return <p key={idx}>{text}</p>;
+            })}
           </div>
         </div>
       </section>
@@ -103,7 +109,7 @@ export default function About() {
               {data.vision_title || 'Our Vision'}
             </h3>
             <p className="text-body-md font-body-md text-on-surface-variant flex-grow leading-relaxed">
-              {data.vision_text || 'To create a future where equitable access to quality healthcare and clean water is universally guaranteed, empowering communities to thrive and reach their full potential without the burden of preventable diseases.'}
+              {data.vision || data.vision_text || 'To create a future where equitable access to quality healthcare and clean water is universally guaranteed, empowering communities to thrive and reach their full potential without the burden of preventable diseases.'}
             </p>
           </div>
 
@@ -118,7 +124,7 @@ export default function About() {
               {data.mission_title || 'Our Mission'}
             </h3>
             <p className="text-body-md font-body-md text-on-surface-variant flex-grow leading-relaxed">
-              {data.mission_text || 'To design and implement innovative, sustainable healthcare and WASH interventions. We strive to strengthen local health systems, provide immediate relief, and deliver continuous education to foster resilient, self-sufficient communities.'}
+              {data.mission || data.mission_text || 'To design and implement innovative, sustainable healthcare and WASH interventions. We strive to strengthen local health systems, provide immediate relief, and deliver continuous education to foster resilient, self-sufficient communities.'}
             </p>
           </div>
         </div>

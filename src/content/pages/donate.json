@@ -1,0 +1,31 @@
+{
+  "title": "Empower Vulnerable Communities",
+  "subtitle": "100% of your public donations go directly to community healthcare, WASH infrastructure, and maternal wellness across Nigeria.",
+  "impact_tiers": [
+    {
+      "amount": "$25",
+      "amountNGN": "₦15,000",
+      "title": "Clean Water for a Child",
+      "impact": "Provides water testing, sanitation supplies, and hygiene kit for one student for an entire academic year."
+    },
+    {
+      "amount": "$50",
+      "amountNGN": "₦35,000",
+      "title": "Maternal Care Pack",
+      "impact": "Funds sanitized birth delivery kits and prenatal screenings for expectant mothers at community outreach clinics."
+    },
+    {
+      "amount": "$100",
+      "amountNGN": "₦75,000",
+      "title": "Mobile Clinic Outreach",
+      "impact": "Subsidizes essential pharmaceuticals, malaria diagnostics, and cold-chain vaccines for an entire remote village."
+    },
+    {
+      "amount": "$250",
+      "amountNGN": "₦150,000",
+      "title": "School Sanitation Station",
+      "impact": "Co-sponsors a multi-tap touchless handwashing hub with sustainable greywater drainage at a public school."
+    }
+  ],
+  "tax_notice": "Registered Non-Profit (CAC/IT/Nigeria) • Bank-Grade 256-Bit SSL Security • Quarterly Audited Financial Disclosures • Tax-Deductible Receipt Issued Instantly"
+}

@@ -1,0 +1,26 @@
+{
+  "title": "Partner With Ronnie Care",
+  "subtitle": "We collaborate with institutional grantmakers, corporate CSR initiatives, INGOs, and government ministries to scale clinical outreach and sustainable WASH systems across West Africa.",
+  "pillars": [
+    {
+      "title": "Corporate CSR Alignment",
+      "icon": "corporate_fare",
+      "description": "Tailored ESG and CSR impact programs delivering measurable water and healthcare indicators for corporate stakeholders."
+    },
+    {
+      "title": "Institutional Grants & INGOs",
+      "icon": "account_balance",
+      "description": "Proven financial stewardship and field implementation capacity for USAID, EU, and foundation-backed public health grants."
+    },
+    {
+      "title": "WASH Infrastructure Co-Funding",
+      "icon": "water_drop",
+      "description": "Capital co-investment for community-scale solar boreholes, school hygiene facilities, and municipal sanitation nodes."
+    },
+    {
+      "title": "Pharmaceutical & Medical Supply",
+      "icon": "medical_services",
+      "description": "Direct logistical channels to distribute cold-chain vaccines, diagnostic tools, and essential medicine to frontline clinics."
+    }
+  ]
+}

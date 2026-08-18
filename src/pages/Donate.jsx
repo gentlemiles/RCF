@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import donateData from '../content/pages/donate.json';
 
 export default function Donate() {
+  const data = donateData || {};
   const [step, setStep] = useState(1);
   const [frequency, setFrequency] = useState('one-time');
   const [currency, setCurrency] = useState('USD');
@@ -34,30 +36,30 @@ export default function Donate() {
     GBP: ['20', '40', '80', '200', '400'],
   };
 
-  const impactBreakdown = [
+  const impactBreakdown = data?.impact_tiers || [
     {
-      amountUSD: '$25',
+      amount: '$25',
       amountNGN: '₦15,000',
       title: 'Clean Water for a Child',
-      desc: 'Provides water testing, sanitation supplies, and hygiene kit for one student for an entire academic year.',
+      impact: 'Provides water testing, sanitation supplies, and hygiene kit for one student for an entire academic year.',
     },
     {
-      amountUSD: '$50',
+      amount: '$50',
       amountNGN: '₦35,000',
       title: 'Maternal Care Pack',
-      desc: 'Funds sanitized birth delivery kits and prenatal screenings for expectant mothers at community outreach clinics.',
+      impact: 'Funds sanitized birth delivery kits and prenatal screenings for expectant mothers at community outreach clinics.',
     },
     {
-      amountUSD: '$100',
+      amount: '$100',
       amountNGN: '₦75,000',
       title: 'Mobile Clinic Outreach',
-      desc: 'Subsidizes essential pharmaceuticals, malaria diagnostics, and cold-chain vaccines for an entire remote village.',
+      impact: 'Subsidizes essential pharmaceuticals, malaria diagnostics, and cold-chain vaccines for an entire remote village.',
     },
     {
-      amountUSD: '$250',
+      amount: '$250',
       amountNGN: '₦150,000',
       title: 'School Sanitation Station',
-      desc: 'Co-sponsors a multi-tap touchless handwashing hub with sustainable greywater drainage at a public school.',
+      impact: 'Co-sponsors a multi-tap touchless handwashing hub with sustainable greywater drainage at a public school.',
     },
   ];
 
@@ -87,10 +89,10 @@ export default function Donate() {
             <span className="font-label-sm text-label-sm font-semibold">Direct Impact Portal</span>
           </div>
           <h1 className="text-display-lg font-display-lg text-primary font-bold md:text-display-lg text-headline-lg-mobile mb-3">
-            Empower Vulnerable Communities
+            {data.title || 'Empower Vulnerable Communities'}
           </h1>
           <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
-            100% of your public donations go directly to community healthcare, WASH infrastructure, and maternal wellness across Nigeria.
+            {data.subtitle || '100% of your public donations go directly to community healthcare, WASH infrastructure, and maternal wellness across Nigeria.'}
           </p>
         </div>
       </section>
@@ -117,11 +119,11 @@ export default function Donate() {
                     className="p-4 rounded-xl bg-surface-container-low/60 border border-surface-variant/70 flex gap-4"
                   >
                     <div className="text-lg font-bold text-secondary font-headline-lg shrink-0">
-                      {currency === 'NGN' ? item.amountNGN : item.amountUSD}
+                      {currency === 'NGN' && item.amountNGN ? item.amountNGN : item.amount}
                     </div>
                     <div>
-                      <h4 className="font-title-md text-sm font-bold text-primary">{item.title}</h4>
-                      <p className="text-xs text-on-surface-variant mt-1 leading-relaxed">{item.desc}</p>
+                      {item.title && <h4 className="font-title-md text-sm font-bold text-primary">{item.title}</h4>}
+                      <p className="text-xs text-on-surface-variant mt-1 leading-relaxed">{item.impact}</p>
                     </div>
                   </div>
                 ))}
@@ -150,10 +152,11 @@ export default function Donate() {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-white/20 text-xs text-on-primary/80 italic">
-                "Ronnie Care’s transparency and real-time field reporting give us full confidence that our support saves lives in the most remote areas."
-                <div className="font-semibold text-white mt-1.5 not-italic">— Community Partner Advisory</div>
-              </div>
+              {data.tax_notice && (
+                <div className="pt-4 border-t border-white/20 text-xs text-on-primary/80">
+                  {data.tax_notice}
+                </div>
+              )}
             </div>
           </div>
 

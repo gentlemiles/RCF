@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import partnerData from '../content/pages/partner.json';
 
 export default function Partner() {
+  const data = partnerData || {};
   const [formData, setFormData] = useState({
     orgName: '',
     orgType: 'Corporate CSR',
@@ -20,26 +22,26 @@ export default function Partner() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const partnershipPillars = [
+  const partnershipPillars = data?.pillars || [
     {
       title: 'Corporate CSR Alignment',
       icon: 'corporate_fare',
-      desc: 'Tailored ESG and CSR impact programs delivering measurable water and healthcare indicators for corporate stakeholders.',
+      description: 'Tailored ESG and CSR impact programs delivering measurable water and healthcare indicators for corporate stakeholders.',
     },
     {
       title: 'Institutional Grants & INGOs',
       icon: 'account_balance',
-      desc: 'Proven financial stewardship and field implementation capacity for USAID, EU, and foundation-backed public health grants.',
+      description: 'Proven financial stewardship and field implementation capacity for USAID, EU, and foundation-backed public health grants.',
     },
     {
       title: 'WASH Infrastructure Co-Funding',
       icon: 'water_drop',
-      desc: 'Capital co-investment for community-scale solar boreholes, school hygiene facilities, and municipal sanitation nodes.',
+      description: 'Capital co-investment for community-scale solar boreholes, school hygiene facilities, and municipal sanitation nodes.',
     },
     {
       title: 'Pharmaceutical & Medical Supply',
       icon: 'medical_services',
-      desc: 'Direct logistical channels to distribute cold-chain vaccines, diagnostic tools, and essential medicine to frontline clinics.',
+      description: 'Direct logistical channels to distribute cold-chain vaccines, diagnostic tools, and essential medicine to frontline clinics.',
     },
   ];
 
@@ -75,10 +77,10 @@ export default function Partner() {
             <span className="font-label-sm text-label-sm font-semibold">Institutional & Strategic Alliances</span>
           </div>
           <h1 className="text-display-lg font-display-lg text-primary font-bold md:text-display-lg text-headline-lg-mobile mb-4">
-            Partner With Ronnie Care
+            {data.title || 'Partner With Ronnie Care'}
           </h1>
           <p className="font-body-lg text-body-lg text-on-surface-variant max-w-3xl mx-auto leading-relaxed">
-            We collaborate with institutional grantmakers, corporate CSR initiatives, INGOs, and government ministries to scale clinical outreach and sustainable WASH systems across West Africa.
+            {data.subtitle || 'We collaborate with institutional grantmakers, corporate CSR initiatives, INGOs, and government ministries to scale clinical outreach and sustainable WASH systems across West Africa.'}
           </p>
         </div>
       </section>
@@ -92,10 +94,10 @@ export default function Partner() {
               className="bg-surface-container-lowest p-6 rounded-xl border border-surface-variant shadow-sm hover:shadow-md transition-all flex flex-col"
             >
               <div className="w-12 h-12 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center mb-4">
-                <span className="material-symbols-outlined text-2xl">{pillar.icon}</span>
+                <span className="material-symbols-outlined text-2xl">{pillar.icon || 'corporate_fare'}</span>
               </div>
               <h3 className="font-title-md text-base font-bold text-primary mb-2">{pillar.title}</h3>
-              <p className="text-body-md text-xs text-on-surface-variant leading-relaxed flex-grow">{pillar.desc}</p>
+              <p className="text-body-md text-xs text-on-surface-variant leading-relaxed flex-grow">{pillar.description}</p>
             </div>
           ))}
         </div>
