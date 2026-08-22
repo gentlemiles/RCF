@@ -1,10 +1,11 @@
 {
-  "location_badge": "Abuja, Nigeria",
-  "hero_title": "Breaking Barriers.\nEmpowering Families.\nBuilding Futures.",
-  "hero_subtitle": "Dedicated to advancing healthcare access and WASH initiatives across Nigerian communities. Bridging the gap between clinical excellence and grassroots needs.",
-  "hero_image": "https://lh3.googleusercontent.com/aida-public/AB6AXuAGo_rgld05nN4TxJaiGeCYCZ60hic0BASx7Rh8v58Pk1WONzNarNhPCoBIwX1SXOawJADdznxgOyr6FCv9sxqScmQgI5MXNlGuEJaTWxYlwSYs05viiioOlbllyY4KFUHqOwfAcVOjoVzTq-ruB-QvK4dmPuaxMQ5lYSxoZR5j3xj_N1XkB4Vso8dZF6EBk3EeYFsSdEfj7y175wASz6dUpcVzvoevhzJXl5-UQx0fXMBOX69sgqFK",
-  "hero_badge_stat": "10k+",
-  "hero_badge_label": "Lives Touched",
+  "featured_campaign": {
+    "tag": "WASH Project",
+    "title": "Global Hand Washing Day Observance",
+    "description": "Join us as we deploy new handwashing stations across 5 schools in Abuja, promoting hygiene practices that prevent disease and keep children healthy and active in their education.",
+    "image": "/images/uploads/global-handwash-day-3-.jpeg",
+    "link_url": "/stories"
+  },
   "metrics": [
     {
       "stat": "10,000+",
@@ -23,6 +24,12 @@
       "label": "Transparent"
     }
   ],
+  "hero_title": "\"Breaking down barriers so that every child can rise, and every family can soar\"",
+  "hero_badge_label": "Lives Touched",
+  "hero_badge_stat": "10k+",
+  "hero_image": "/images/uploads/eradication-of-silent-killer-program-.jpeg",
+  "location_badge": "Abuja, Nigeria",
+  "hero_subtitle": "To empower disenfranchised family units in Nigeria through coordinated gender-sensitive health, social, and educational empowerment and financial emancipation initiatives. To see a global community of under-served families who are given deserved opportunities to fulfill their potential.",
   "focus_areas": [
     {
       "title": "Universal Health Coverage",
@@ -35,21 +42,14 @@
       "description": "Building clean water stations and sanitation facilities to keep students healthy and in school."
     },
     {
-      "title": "Girls' Education & Dignity",
+      "title": "Education",
       "icon": "girl",
-      "description": "Providing menstrual hygiene management resources and advocating for educational equity."
+      "description": "Offer access to free, safe, and quality education and provide adult education opportunities to older adults who want another shot at formal education."
     },
     {
-      "title": "Social Advocacy",
+      "title": "Social Advocacy for Change",
       "icon": "campaign",
       "description": "Empowering communities through health education and policy advocacy at local levels."
     }
-  ],
-  "featured_campaign": {
-    "tag": "WASH Project",
-    "title": "Global Hand Washing Day Observance",
-    "description": "Join us as we deploy new handwashing stations across 5 schools in Abuja, promoting hygiene practices that prevent disease and keep children healthy and active in their education.",
-    "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCOTJ1ZQ7Gr0-A_TUgsWE1NHdbn6KZ0j9HR9-mlqIJtTqSYtbXTEXDrwsoiNEkC_yFPWC0ytmQ1_aS-9l3jI69_ma0o8VxAW6SoT1VEqN6pnY0l-BEsO2Gc0EgQVA7WaHPPUOy-B-vVI_D_VqM4aTZic1Zv4OQo5ayRKtg_7Tt6H8kApJNWJcuThMyTJ3pO4MKDBLMgknypXw7EmkR9gLR3MXlEZl3FtNTo1n44-eP6x_uGB7pOHagt",
-    "link_url": "/stories"
-  }
+  ]
 }
