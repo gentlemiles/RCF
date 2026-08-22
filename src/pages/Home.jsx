@@ -196,7 +196,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h4 className="font-title-md text-title-md text-primary mb-1 font-semibold">Email Us</h4>
-                  <p className="font-body-md text-body-md text-on-surface-variant">contact@ronniecare.org</p>
+                  <p className="font-body-md text-body-md text-on-surface-variant">info@ronniecarefoundation.com</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
