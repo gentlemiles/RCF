@@ -2,12 +2,24 @@
   "hero_tag": "Medical Interventions & Universal Health Coverage",
   "hero_title": "Equitable Healthcare. Early Detection. Healthier Communities.",
   "hero_subtitle": "Delivering free diagnostic screenings, subsidized reproductive & maternal care, and emergency infectious disease outreaches to underserved populations across Abuja and Nigerian communities.",
-  "hero_image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDKc7SJg8OpeyMbZpS57ZhQvpi0BU5xiK06f_RNYaHROgRg8kYc1CbEUxvMHiFjUu0qhKQfYLN1C0jDgAcgVZUQr6nN4QBgemtrxrDGv78usHcrp4W6b4QkTumI9ZyhBWIZZQ8Ue1Z3M5ok2ABtL1av3AFB1pgttyhPctVbjHOwhWpod9xFOXRETs2EAfxU6x7BhCgJqlSx9uoZbUlNwxZPxEkn4jnneLWFLU7dkPutGxD1Wnj2Y4gb",
+  "hero_image": "/images/uploads/eradication-of-silent-killer-program.jpeg",
   "stats": [
-    { "value": "15,000+", "label": "Lives Reached via Free Screenings (2021–2025)" },
-    { "value": "600+", "label": "Women Screened for Tumor & Cancer Markers" },
-    { "value": "200+", "label": "Families Protected on World Malaria Day" },
-    { "value": "₦260k+", "label": "Fertility & Diagnostic Aid Subsidized" }
+    {
+      "value": "15,000+",
+      "label": "Lives Reached via Free Screenings (2021–2025)"
+    },
+    {
+      "value": "600+",
+      "label": "Women Screened for Tumor & Cancer Markers"
+    },
+    {
+      "value": "2000+",
+      "label": "Families Protected on World Malaria Day(2019-2025)"
+    },
+    {
+      "value": "₦260M+",
+      "label": "Fertility & Diagnostic Aid Subsidized"
+    }
   ],
   "pillars": [
     {
