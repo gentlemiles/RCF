@@ -1,0 +1,41 @@
+{
+  "hero_tag": "Medical Interventions & Universal Health Coverage",
+  "hero_title": "Equitable Healthcare. Early Detection. Healthier Communities.",
+  "hero_subtitle": "Delivering free diagnostic screenings, subsidized reproductive & maternal care, and emergency infectious disease outreaches to underserved populations across Abuja and Nigerian communities.",
+  "hero_image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDKc7SJg8OpeyMbZpS57ZhQvpi0BU5xiK06f_RNYaHROgRg8kYc1CbEUxvMHiFjUu0qhKQfYLN1C0jDgAcgVZUQr6nN4QBgemtrxrDGv78usHcrp4W6b4QkTumI9ZyhBWIZZQ8Ue1Z3M5ok2ABtL1av3AFB1pgttyhPctVbjHOwhWpod9xFOXRETs2EAfxU6x7BhCgJqlSx9uoZbUlNwxZPxEkn4jnneLWFLU7dkPutGxD1Wnj2Y4gb",
+  "stats": [
+    { "value": "15,000+", "label": "Lives Reached via Free Screenings (2021–2025)" },
+    { "value": "600+", "label": "Women Screened for Tumor & Cancer Markers" },
+    { "value": "200+", "label": "Families Protected on World Malaria Day" },
+    { "value": "₦260k+", "label": "Fertility & Diagnostic Aid Subsidized" }
+  ],
+  "pillars": [
+    {
+      "title": "Oncology & Tumor Screening",
+      "icon": "medical_services",
+      "description": "Routine breast and cervical cancer awareness, tumor marker screenings, and early detection campaigns in partnership with POWA and community organizations."
+    },
+    {
+      "title": "Reproductive Health & Fertility Support",
+      "icon": "pregnant_woman",
+      "description": "Free pelvic ultrasounds, up to 90%-discounted fertility workups, and subsidized OB/GYN consultations for couples in collaboration with Ronnie Diagnostic Center."
+    },
+    {
+      "title": "Infectious Disease Control & Malaria",
+      "icon": "sanitizer",
+      "description": "Targeted grassroots medical outreaches, Walk against Malaria initiatives, rapid testing, and distribution of insecticide-treated nets to vulnerable settlements."
+    },
+    {
+      "title": "IDP & Rural Medical Outreaches",
+      "icon": "health_and_safety",
+      "description": "Comprehensive primary healthcare, antenatal scans, and pharmaceutical care for internally displaced persons and hard-to-reach settlements like Durumi IDP Camp."
+    }
+  ],
+  "affiliate_banner": {
+    "badge": "Diagnostic Center Partner",
+    "title": "In Clinical Affiliation with Ronnie Diagnostic Center, Abuja",
+    "description": "Leveraging state-of-the-art laboratory analysis, ultrasound imaging, and diagnostic equipment to ensure precision clinical standards in every community outreach.",
+    "link_text": "Explore Partnership Opportunities",
+    "link_url": "/partner"
+  }
+}

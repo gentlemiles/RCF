@@ -140,8 +140,8 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/wash" className="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors duration-200">
-                WASH Initiatives
+              <Link to="/health-initiatives" className="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors duration-200">
+                Health Initiatives
               </Link>
             </li>
             <li>

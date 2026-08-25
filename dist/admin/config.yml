@@ -97,21 +97,22 @@ collections:
               - { label: "Headshot Image", name: "headshot", widget: "image" }
               - { label: "Bio", name: "bio", widget: "text" }
 
-      # WASH
-      - name: "wash"
-        label: "WASH Initiatives Page"
-        file: "src/content/pages/wash.json"
+      # --- HEALTH INITIATIVES PAGE ---
+      - name: "health"
+        label: "Health Initiatives Page"
+        file: "src/content/pages/health.json"
         fields:
+          - { label: "Hero Badge Tag", name: "hero_tag", widget: "string" }
           - { label: "Hero Title", name: "hero_title", widget: "string" }
-          - { label: "Hero Description", name: "hero_description", widget: "text" }
-          - { label: "Hero Background Image", name: "hero_bg_image", widget: "image" }
-          - label: "WASH Impact Stats"
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
+          - { label: "Hero Image", name: "hero_image", widget: "image" }
+          - label: "Impact Stats"
             name: "stats"
             widget: "list"
             fields:
               - { label: "Value", name: "value", widget: "string" }
               - { label: "Label", name: "label", widget: "string" }
-          - label: "Core Pillars"
+          - label: "Intervention Pillars"
             name: "pillars"
             widget: "list"
             summary: "{{fields.title}}"

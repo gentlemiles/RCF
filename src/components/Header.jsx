@@ -11,7 +11,7 @@ export default function Header() {
   const navLinks = [
     { name: 'About Us', path: '/about' },
     { name: 'Our Work', path: '/our-work' },
-    { name: 'WASH Initiatives', path: '/wash' },
+    { name: 'Health Initiatives', path: '/health-initiatives' },
     { name: 'Field Stories', path: '/stories' },
     { name: 'Contact', path: '/#contact' },
   ];
