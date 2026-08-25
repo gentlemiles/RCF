@@ -9,13 +9,43 @@ export default function Home() {
     email: '',
     message: '',
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    setFormData({ firstName: '', lastName: '', email: '', message: '' });
-    setTimeout(() => setSubmitted(false), 6000);
+    setIsSubmitting(true);
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/info@ronniecarefoundation.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          'First Name': formData.firstName,
+          'Last Name': formData.lastName,
+          'Email': formData.email,
+          'Message': formData.message,
+          '_subject': 'New Contact Form Inquiry - Ronnie Care Foundation',
+          '_template': 'table',
+        }),
+      });
+
+      if (response.ok) {
+        setIsSuccess(true);
+        setFormData({ firstName: '', lastName: '', email: '', message: '' });
+      } else {
+        setErrorMessage('Failed to send message. Please try again or email us directly at info@ronniecarefoundation.com.');
+      }
+    } catch (error) {
+      setErrorMessage('Failed to send message. Please try again or email us directly at info@ronniecarefoundation.com.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const data = homeData || {};
@@ -217,24 +247,33 @@ export default function Home() {
           </div>
 
           <div className="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-surface-variant">
-            {submitted ? (
-              <div className="py-12 text-center flex flex-col items-center gap-4">
+            {isSuccess ? (
+              <div className="py-12 text-center flex flex-col items-center gap-4 animate-fadeIn">
                 <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center">
                   <span className="material-symbols-outlined text-3xl">check_circle</span>
                 </div>
-                <h3 className="text-xl font-bold text-primary">Message Sent Successfully!</h3>
-                <p className="text-on-surface-variant max-w-sm">
-                  Thank you for reaching out to the Ronnie Care Foundation. Our operations team will respond within 24–48 hours.
+                <h3 className="text-xl font-bold text-primary">Thank You!</h3>
+                <p className="text-emerald-700 font-medium bg-emerald-50 border border-emerald-200 rounded-lg p-3 max-w-sm">
+                  Your message has been sent to our team at info@ronniecarefoundation.com.
+                </p>
+                <p className="text-on-surface-variant max-w-sm text-sm">
+                  Our operations team will respond to your inquiry within 24–48 hours.
                 </p>
                 <button
-                  onClick={() => setSubmitted(false)}
-                  className="mt-4 font-label-sm text-label-sm px-6 py-2 rounded-lg border border-primary text-primary hover:bg-primary/5"
+                  onClick={() => setIsSuccess(false)}
+                  className="mt-4 font-label-sm text-label-sm px-6 py-2.5 rounded-lg border border-primary text-primary hover:bg-primary/5 transition-colors font-medium"
                 >
                   Send Another Message
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                {errorMessage && (
+                  <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg flex items-center gap-2">
+                    <span className="material-symbols-outlined text-base">error</span>
+                    <span>{errorMessage}</span>
+                  </div>
+                )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="flex flex-col gap-2">
                     <label className="font-label-sm text-label-sm text-primary font-medium" htmlFor="firstName">
@@ -290,10 +329,18 @@ export default function Home() {
                   ></textarea>
                 </div>
                 <button
-                  className="font-label-sm text-label-sm w-full py-4 rounded-lg bg-secondary text-white hover:opacity-90 active:scale-[0.99] transition-all mt-2 font-medium"
+                  disabled={isSubmitting}
+                  className="font-label-sm text-label-sm w-full py-4 rounded-lg bg-secondary text-white hover:opacity-90 active:scale-[0.99] transition-all mt-2 font-medium flex items-center justify-center gap-2 disabled:opacity-70 shadow-sm"
                   type="submit"
                 >
-                  Send Message
+                  {isSubmitting ? (
+                    <>
+                      <span className="material-symbols-outlined animate-spin text-lg">progress_activity</span>
+                      <span>Sending Message...</span>
+                    </>
+                  ) : (
+                    <span>Send Message</span>
+                  )}
                 </button>
               </form>
             )}
