@@ -1,7 +1,7 @@
 {
   "hero_title": "Dedicated to advancing women protection, accessible healthcare and WASH initiatives across Nigerian communities.",
   "hero_subtitle": "We believe that access to basic healthcare, basic education, basic women's representation, and clean water is a fundamental human right. Our mission is to bridge the gap and deliver sustainable solutions to those who need them most.",
-  "hero_image": "/images/uploads/eradication-of-silent-killer-program.jpeg",
+  "hero_image": "/images/uploads/a3a61c93-30c6-43bf-9dc3-1c514444b236.jpg",
   "story_paragraphs": [
     "Ronnie Care Foundation was born out of a profound need to address the systemic disparities in healthcare and sanitation access within underserved regions. What began as a localized effort to provide essential medical supplies has rapidly evolved into a comprehensive network of care, reaching numerous communities.",
     "Our journey has been defined by collaborative partnerships with local leaders, international health organizations, education policymakers, and a dedicated team of medical professionals. Together, we are building resilient health infrastructure and sustainable education framework/toolkit and pioneering sustainable Water, Sanitation, and Hygiene (WASH) programs that save lives and foster long-term community well-being."
@@ -26,6 +26,12 @@
       "title": "Programs Officer",
       "headshot": "/images/uploads/passport-7.png",
       "bio": "A Project Management Analyst and Data Management Professional with over five years of experience in project coordination, data management, records administration, and digital transformation. Passionate about youth development, education, innovation, and creating opportunities that make a lasting difference."
+    },
+    {
+      "name": "Engr. Adefila Taiwo Joshua",
+      "title": "Grants Manager/ Country Director(Ghana)",
+      "headshot": "/images/uploads/img-20220131-wa0061.jpg",
+      "bio": "A pragmatic and forward-thinking individual with specific interests in engineering, management, policy-making, and leadership."
     }
   ]
 }
