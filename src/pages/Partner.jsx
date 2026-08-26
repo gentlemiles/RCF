@@ -23,7 +23,7 @@ export default function Partner() {
   const [errorMessage, setErrorMessage] = useState('');
   const [isDragging, setIsDragging] = useState(false);
 
-  const MAX_FILE_SIZE = 25 * 1024 * 1024; // 25MB
+  const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB (FormSubmit free tier limit)
 
   const partnershipPillars = data?.pillars || [
     {
@@ -61,7 +61,7 @@ export default function Partner() {
     if (!file) return;
 
     if (file.size > MAX_FILE_SIZE) {
-      setErrorMessage('Attachment exceeds the 25MB maximum limit. Please upload a smaller file.');
+      setErrorMessage('File size exceeds 5MB limit. Please upload a smaller document.');
       return;
     }
 
@@ -121,6 +121,19 @@ export default function Partner() {
 
     try {
       const formData = new FormData();
+
+      // FormSubmit System Controls
+      formData.append('_replyto', workEmail);
+      formData.append('email', workEmail);
+      formData.append('_subject', `[Partnership Proposal] ${organizationName} - ${engagementType}`);
+      formData.append('_template', 'table');
+
+      // Document Attachment (Must be named 'attachment')
+      if (attachment) {
+        formData.append('attachment', attachment);
+      }
+
+      // Partner Details
       formData.append('Organization Name', organizationName);
       formData.append('Organization Type', organizationType);
       formData.append('Lead Contact Name', contactName);
@@ -130,12 +143,6 @@ export default function Partner() {
       formData.append('Proposal Type', engagementType);
       formData.append('Estimated Budget / Grant', estimatedBudget);
       formData.append('Executive Summary', executiveSummary);
-      formData.append('_subject', `[Partnership Proposal] ${organizationName} - ${engagementType}`);
-      formData.append('_template', 'table');
-
-      if (attachment) {
-        formData.append('attachment', attachment);
-      }
 
       const response = await fetch('https://formsubmit.co/ajax/info@ronniecarefoundation.com', {
         method: 'POST',
@@ -260,7 +267,7 @@ export default function Partner() {
                 </div>
                 <button
                   onClick={() => setIsSuccess(false)}
-                  className="mt-4 px-6 py-2.5 rounded-lg border border-primary text-primary font-label-sm hover:bg-primary/5 text-sm font-medium transition-colors"
+                  className="mt-4 px-6 py-2.5 rounded-lg border border-primary text-primary font-label-sm hover:bg-primary/5 text-sm font-medium transition-colors cursor-pointer"
                 >
                   Submit Another Proposal
                 </button>
@@ -410,7 +417,7 @@ export default function Partner() {
                 {/* Drag and Drop File Upload Attachment */}
                 <div>
                   <label className="block text-xs font-semibold text-primary mb-1">
-                    Attach Proposal / Concept Note / Deck (.pdf, .docx, max 25MB)
+                    Attach Proposal / Concept Note / Deck (PDF or DOCX, max 5MB)
                   </label>
                   <div
                     onDragOver={handleDragOver}
@@ -441,7 +448,7 @@ export default function Partner() {
                           <button
                             type="button"
                             onClick={handleRemoveFile}
-                            className="p-1 rounded hover:bg-surface-variant text-red-600 ml-2"
+                            className="p-1 rounded hover:bg-surface-variant text-red-600 ml-2 cursor-pointer"
                             title="Remove attachment"
                           >
                             <span className="material-symbols-outlined text-base">close</span>
