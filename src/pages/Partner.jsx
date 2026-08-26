@@ -15,7 +15,7 @@ export default function Partner() {
   const [targetRegion, setTargetRegion] = useState('Abuja & Northern Nigeria');
   const [engagementType, setEngagementType] = useState('Institutional Grant Proposal');
   const [estimatedBudget, setEstimatedBudget] = useState('< $25,000 USD (Pilot / Local)');
-  const [attachment, setAttachment] = useState(null);
+  const [attachments, setAttachments] = useState([]); // Array of File objects
   const [executiveSummary, setExecutiveSummary] = useState('');
 
   // UI States
@@ -24,7 +24,9 @@ export default function Partner() {
   const [errorMessage, setErrorMessage] = useState('');
   const [isDragging, setIsDragging] = useState(false);
 
-  const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB limit for attachments
+  const MAX_FILES = 5;
+  const MAX_TOTAL_SIZE = 25 * 1024 * 1024; // 25 MB
+  const ALLOWED_EXTENSIONS = ['.pdf', '.docx'];
 
   const partnershipPillars = data?.pillars || [
     {
@@ -56,37 +58,48 @@ export default function Partner() {
     { name: 'Northern Rural Corridors', country: 'West Africa', role: 'Community Outreach & Primary Healthcare' },
   ];
 
-  // File Handling
-  const handleValidateAndSetFile = (file) => {
+  // Multi-File Validation & Add Handler
+  const handleValidateAndAddFiles = (newFiles) => {
     setErrorMessage('');
-    if (!file) return;
+    const incoming = Array.from(newFiles || []);
+    if (!incoming.length) return;
 
-    if (file.size > MAX_FILE_SIZE) {
-      setErrorMessage('File size exceeds the 5MB limit. Please upload a smaller document.');
-      if (fileInputRef.current) {
-        fileInputRef.current.value = '';
-      }
-      setAttachment(null);
+    if (attachments.length + incoming.length > MAX_FILES) {
+      setErrorMessage(`You can only upload up to ${MAX_FILES} documents in total.`);
+      if (fileInputRef.current) fileInputRef.current.value = '';
       return;
     }
 
-    const validExtensions = ['.pdf', '.docx', '.doc'];
-    const fileExt = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
-    if (!validExtensions.includes(fileExt)) {
-      setErrorMessage('Unsupported format. Please attach a PDF or Word document (.pdf, .docx, .doc).');
-      if (fileInputRef.current) {
-        fileInputRef.current.value = '';
+    for (const file of incoming) {
+      const ext = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+      if (!ALLOWED_EXTENSIONS.includes(ext)) {
+        setErrorMessage(`Invalid file format: "${file.name}". Only .pdf and .docx files are allowed.`);
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
       }
-      setAttachment(null);
+    }
+
+    const combined = [...attachments, ...incoming];
+    const totalBytes = combined.reduce((acc, f) => acc + f.size, 0);
+
+    if (totalBytes > MAX_TOTAL_SIZE) {
+      const totalMB = (totalBytes / (1024 * 1024)).toFixed(1);
+      setErrorMessage(`Total file size (${totalMB} MB) exceeds the 25 MB limit.`);
+      if (fileInputRef.current) fileInputRef.current.value = '';
       return;
     }
 
-    setAttachment(file);
+    setAttachments(combined);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
-  const handleFileChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      handleValidateAndSetFile(e.target.files[0]);
+  const handleRemoveFile = (indexToRemove) => {
+    setAttachments(attachments.filter((_, idx) => idx !== indexToRemove));
+    setErrorMessage('');
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
     }
   };
 
@@ -106,23 +119,8 @@ export default function Partner() {
     e.preventDefault();
     e.stopPropagation();
     setIsDragging(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      const file = e.dataTransfer.files[0];
-      handleValidateAndSetFile(file);
-      if (fileInputRef.current && typeof DataTransfer !== 'undefined') {
-        const dt = new DataTransfer();
-        dt.items.add(file);
-        fileInputRef.current.files = dt.files;
-      }
-    }
-  };
-
-  const handleRemoveFile = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setAttachment(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      handleValidateAndAddFiles(e.dataTransfer.files);
     }
   };
 
@@ -150,9 +148,10 @@ export default function Partner() {
       formData.append('Estimated Budget / Grant', estimatedBudget);
       formData.append('Executive Summary', executiveSummary);
 
-      if (attachment) {
-        formData.append('attachment', attachment);
-      }
+      // Append all attachments
+      attachments.forEach((file) => {
+        formData.append('attachment', file);
+      });
 
       const response = await fetch('https://netlify-cms-github-oauth-provider-rho.vercel.app/api/send-proposal', {
         method: 'POST',
@@ -167,7 +166,7 @@ export default function Partner() {
         setContactName('');
         setDesignation('');
         setWorkEmail('');
-        setAttachment(null);
+        setAttachments([]);
         setExecutiveSummary('');
       } else {
         setErrorMessage(result.message || 'Failed to submit proposal. Please verify your connection or email info@ronniecarefoundation.com directly.');
@@ -183,6 +182,8 @@ export default function Partner() {
     setIsSuccess(false);
     setErrorMessage('');
   };
+
+  const totalUploadedMB = (attachments.reduce((acc, f) => acc + f.size, 0) / (1024 * 1024)).toFixed(2);
 
   return (
     <div className="flex flex-col">
@@ -268,7 +269,7 @@ export default function Partner() {
                     Thank you for reaching out!
                   </p>
                   <p>
-                    Our executive operations board has received your institutional submission via our secure SMTP gateway and will review the proposal within 48 business hours. A confirmation has been routed to <strong>info@ronniecarefoundation.com</strong>.
+                    Our executive operations board has received your institutional submission via our secure SMTP gateway and will review the proposal and attachments within 48 business hours. A confirmation has been routed to <strong>info@ronniecarefoundation.com</strong>.
                   </p>
                 </div>
                 <div className="p-4 bg-surface-container-low rounded-xl border border-surface-variant text-xs text-on-surface-variant mt-2">
@@ -286,7 +287,7 @@ export default function Partner() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 {errorMessage && (
                   <div className="p-4 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl flex items-center gap-3 animate-fadeIn">
-                    <span className="material-symbols-outlined text-red-600">error</span>
+                    <span className="material-symbols-outlined text-red-600 shrink-0">error</span>
                     <span>{errorMessage}</span>
                   </div>
                 )}
@@ -423,51 +424,38 @@ export default function Partner() {
                   </div>
                 </div>
 
-                {/* Drag and Drop File Upload Attachment Input */}
+                {/* Multi-File Upload & Document Attachments */}
                 <div>
-                  <label className="block text-xs font-semibold text-primary mb-1">
-                    Attach Proposal / Concept Note / Deck (PDF or DOCX, max 5MB)
-                  </label>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="block text-xs font-semibold text-primary">
+                      Attach Proposals / Concept Notes / Decks (PDF or DOCX only, max 5 files, up to 25MB total)
+                    </label>
+                    {attachments.length > 0 && (
+                      <span className="text-xs font-semibold text-secondary bg-secondary/10 px-2.5 py-0.5 rounded-full">
+                        {attachments.length} of {MAX_FILES} files ({totalUploadedMB} MB / 25 MB)
+                      </span>
+                    )}
+                  </div>
 
-                  {/* Hidden Native File Input */}
+                  {/* Hidden Native File Input with multiple and .pdf,.docx */}
                   <input
                     ref={fileInputRef}
                     type="file"
                     id="proposalFile"
-                    accept=".pdf,.doc,.docx"
-                    onChange={handleFileChange}
+                    multiple
+                    accept=".pdf,.docx"
+                    onChange={(e) => handleValidateAndAddFiles(e.target.files)}
                     className="hidden"
                   />
 
-                  {attachment ? (
-                    <div className="p-4 rounded-xl border border-surface-variant bg-surface-container-low flex items-center justify-between gap-4">
-                      <div className="flex items-center gap-3 overflow-hidden">
-                        <span className="material-symbols-outlined text-emerald-600 text-2xl shrink-0">
-                          description
-                        </span>
-                        <div className="text-xs truncate">
-                          <p className="font-semibold text-primary truncate">{attachment.name}</p>
-                          <p className="text-on-surface-variant">
-                            {(attachment.size / (1024 * 1024)).toFixed(2)} MB • Attached
-                          </p>
-                        </div>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={handleRemoveFile}
-                        className="px-3 py-1.5 rounded-lg border border-red-200 text-red-600 hover:bg-red-50 text-xs font-semibold flex items-center gap-1 shrink-0 cursor-pointer transition-colors"
-                      >
-                        <span className="material-symbols-outlined text-sm">delete</span>
-                        Remove File
-                      </button>
-                    </div>
-                  ) : (
+                  {/* Drop Zone Area */}
+                  {attachments.length < MAX_FILES && (
                     <div
                       onDragOver={handleDragOver}
                       onDragLeave={handleDragLeave}
                       onDrop={handleDrop}
                       onClick={() => fileInputRef.current?.click()}
-                      className={`border-2 border-dashed rounded-xl p-6 text-center transition-all bg-background cursor-pointer ${
+                      className={`border-2 border-dashed rounded-xl p-6 text-center transition-all bg-background cursor-pointer mb-3 ${
                         isDragging
                           ? 'border-secondary bg-secondary/5 ring-2 ring-secondary/20'
                           : 'border-surface-variant hover:border-secondary/60'
@@ -476,12 +464,47 @@ export default function Partner() {
                       <div className="flex flex-col items-center pointer-events-none">
                         <span className="material-symbols-outlined text-3xl text-secondary mb-2">upload_file</span>
                         <span className="text-sm font-semibold text-primary">
-                          Click to upload proposal document
+                          {attachments.length === 0
+                            ? 'Click to upload proposal documents'
+                            : 'Click to attach additional files'}
                         </span>
                         <span className="text-xs text-on-surface-variant block mt-1">
-                          or drag and drop here (.pdf, .docx, .doc, max 5MB)
+                          or drag and drop files here (.pdf, .docx only, up to 5 files, max 25MB combined)
                         </span>
                       </div>
+                    </div>
+                  )}
+
+                  {/* List of Attached Documents */}
+                  {attachments.length > 0 && (
+                    <div className="space-y-2">
+                      {attachments.map((file, idx) => (
+                        <div
+                          key={idx}
+                          className="p-3.5 rounded-xl border border-surface-variant bg-surface-container-low flex items-center justify-between gap-3 animate-fadeIn"
+                        >
+                          <div className="flex items-center gap-3 overflow-hidden">
+                            <span className="material-symbols-outlined text-emerald-600 text-xl shrink-0">
+                              description
+                            </span>
+                            <div className="text-xs truncate">
+                              <p className="font-semibold text-primary truncate">{file.name}</p>
+                              <p className="text-on-surface-variant text-[11px]">
+                                {(file.size / (1024 * 1024)).toFixed(2)} MB • Ready for submission
+                              </p>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveFile(idx)}
+                            className="px-2.5 py-1.5 rounded-lg border border-red-200 text-red-600 hover:bg-red-50 text-xs font-semibold flex items-center gap-1 shrink-0 cursor-pointer transition-colors"
+                            title="Remove file"
+                          >
+                            <span className="material-symbols-outlined text-sm">close</span>
+                            Remove
+                          </button>
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>
