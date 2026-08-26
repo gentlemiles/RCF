@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
+import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import partnerData from '../content/pages/partner.json';
 
 export default function Partner() {
   const data = partnerData || {};
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const fileInputRef = useRef(null);
+
+  const isSubmitted = searchParams.get('submitted') === 'true';
 
   // Controlled Component States
   const [organizationName, setOrganizationName] = useState('');
@@ -17,13 +22,12 @@ export default function Partner() {
   const [attachment, setAttachment] = useState(null);
   const [executiveSummary, setExecutiveSummary] = useState('');
 
-  // UI & Interaction States
+  // UI States
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isDragging, setIsDragging] = useState(false);
 
-  const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB (FormSubmit free tier limit)
+  const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB limit for attachments
 
   const partnershipPillars = data?.pillars || [
     {
@@ -61,7 +65,11 @@ export default function Partner() {
     if (!file) return;
 
     if (file.size > MAX_FILE_SIZE) {
-      setErrorMessage('File size exceeds 5MB limit. Please upload a smaller document.');
+      setErrorMessage('File size exceeds the 5MB limit. Please upload a smaller document.');
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+      setAttachment(null);
       return;
     }
 
@@ -69,6 +77,10 @@ export default function Partner() {
     const fileExt = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
     if (!validExtensions.includes(fileExt)) {
       setErrorMessage('Unsupported format. Please attach a PDF or Word document (.pdf, .docx, .doc).');
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+      setAttachment(null);
       return;
     }
 
@@ -98,81 +110,47 @@ export default function Partner() {
     e.stopPropagation();
     setIsDragging(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      handleValidateAndSetFile(e.dataTransfer.files[0]);
+      const file = e.dataTransfer.files[0];
+      handleValidateAndSetFile(file);
+      // Synchronize file into the actual input element
+      if (fileInputRef.current && typeof DataTransfer !== 'undefined') {
+        const dt = new DataTransfer();
+        dt.items.add(file);
+        fileInputRef.current.files = dt.files;
+      }
     }
   };
 
   const handleRemoveFile = (e) => {
+    e.preventDefault();
     e.stopPropagation();
     setAttachment(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
-  // Form Submission Handler
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleClientValidation = (e) => {
     setErrorMessage('');
-
     if (!organizationName.trim() || !contactName.trim() || !workEmail.trim() || !executiveSummary.trim()) {
+      e.preventDefault();
       setErrorMessage('Please complete all required fields marked with an asterisk (*).');
-      return;
+      return false;
+    }
+
+    if (attachment && attachment.size > MAX_FILE_SIZE) {
+      e.preventDefault();
+      setErrorMessage('Attachment exceeds the 5MB maximum limit.');
+      return false;
     }
 
     setIsSubmitting(true);
+    return true;
+  };
 
-    try {
-      const formData = new FormData();
-
-      // FormSubmit System Controls
-      formData.append('_replyto', workEmail);
-      formData.append('email', workEmail);
-      formData.append('_subject', `[Partnership Proposal] ${organizationName} - ${engagementType}`);
-      formData.append('_template', 'table');
-
-      // Document Attachment (Must be named 'attachment')
-      if (attachment) {
-        formData.append('attachment', attachment);
-      }
-
-      // Partner Details
-      formData.append('Organization Name', organizationName);
-      formData.append('Organization Type', organizationType);
-      formData.append('Lead Contact Name', contactName);
-      formData.append('Title / Designation', designation);
-      formData.append('Official Work Email', workEmail);
-      formData.append('Target Geographic Region', targetRegion);
-      formData.append('Proposal Type', engagementType);
-      formData.append('Estimated Budget / Grant', estimatedBudget);
-      formData.append('Executive Summary', executiveSummary);
-
-      const response = await fetch('https://formsubmit.co/ajax/info@ronniecarefoundation.com', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-        },
-        body: formData,
-      });
-
-      if (response.ok) {
-        setIsSuccess(true);
-        // Reset form
-        setOrganizationName('');
-        setOrganizationType('Corporate CSR / ESG Division');
-        setContactName('');
-        setDesignation('');
-        setWorkEmail('');
-        setTargetRegion('Abuja & Northern Nigeria');
-        setEngagementType('Institutional Grant Proposal');
-        setEstimatedBudget('< $25,000 USD (Pilot / Local)');
-        setAttachment(null);
-        setExecutiveSummary('');
-      } else {
-        setErrorMessage('Failed to submit proposal. Please verify your connection or email info@ronniecarefoundation.com directly.');
-      }
-    } catch (err) {
-      setErrorMessage('Failed to submit proposal. Please verify your connection or email info@ronniecarefoundation.com directly.');
-    } finally {
-      setIsSubmitting(false);
-    }
+  const handleResetSuccess = () => {
+    setSearchParams({});
+    navigate('/partner', { replace: true });
   };
 
   return (
@@ -247,7 +225,7 @@ export default function Partner() {
               </p>
             </div>
 
-            {isSuccess ? (
+            {isSubmitted ? (
               <div className="py-12 text-center flex flex-col items-center gap-4 animate-fadeIn">
                 <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center shadow-inner">
                   <span className="material-symbols-outlined text-3xl">verified</span>
@@ -266,15 +244,36 @@ export default function Partner() {
                   Proposal Tracking ID: <span className="font-mono font-bold text-primary">PROP-RCF-{Math.floor(100000 + Math.random() * 900000)}</span>
                 </div>
                 <button
-                  onClick={() => setIsSuccess(false)}
+                  type="button"
+                  onClick={handleResetSuccess}
                   className="mt-4 px-6 py-2.5 rounded-lg border border-primary text-primary font-label-sm hover:bg-primary/5 text-sm font-medium transition-colors cursor-pointer"
                 >
                   Submit Another Proposal
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                
+              <form
+                action="https://formsubmit.co/info@ronniecarefoundation.com"
+                method="POST"
+                encType="multipart/form-data"
+                onSubmit={handleClientValidation}
+                className="space-y-6"
+              >
+                {/* FormSubmit System Hidden Controls */}
+                <input
+                  type="hidden"
+                  name="_subject"
+                  value={`[Partnership Proposal] ${organizationName || 'New Entity'} - ${engagementType}`}
+                />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_replyto" value={workEmail} />
+                <input
+                  type="hidden"
+                  name="_next"
+                  value={typeof window !== 'undefined' ? `${window.location.origin}/partner?submitted=true` : ''}
+                />
+                <input type="hidden" name="_captcha" value="false" />
+
                 {errorMessage && (
                   <div className="p-4 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl flex items-center gap-3 animate-fadeIn">
                     <span className="material-symbols-outlined text-red-600">error</span>
@@ -290,6 +289,7 @@ export default function Partner() {
                     </label>
                     <input
                       type="text"
+                      name="Organization Name"
                       required
                       placeholder="e.g., Global Health Fund / Acme Corp CSR"
                       value={organizationName}
@@ -303,6 +303,7 @@ export default function Partner() {
                       Organization Type *
                     </label>
                     <select
+                      name="Organization Type"
                       value={organizationType}
                       onChange={(e) => setOrganizationType(e.target.value)}
                       className="w-full p-3 rounded-xl border border-surface-variant focus:border-secondary focus:ring-2 focus:ring-secondary/20 bg-background text-sm text-primary"
@@ -324,6 +325,7 @@ export default function Partner() {
                     </label>
                     <input
                       type="text"
+                      name="Lead Contact Name"
                       required
                       placeholder="Full name"
                       value={contactName}
@@ -338,6 +340,7 @@ export default function Partner() {
                     </label>
                     <input
                       type="text"
+                      name="Title / Designation"
                       required
                       placeholder="e.g., Director of Partnerships"
                       value={designation}
@@ -352,6 +355,7 @@ export default function Partner() {
                     </label>
                     <input
                       type="email"
+                      name="email"
                       required
                       placeholder="name@organization.org"
                       value={workEmail}
@@ -368,6 +372,7 @@ export default function Partner() {
                       Target Geographic Region
                     </label>
                     <select
+                      name="Target Geographic Region"
                       value={targetRegion}
                       onChange={(e) => setTargetRegion(e.target.value)}
                       className="w-full p-3 rounded-xl border border-surface-variant focus:border-secondary focus:ring-2 focus:ring-secondary/20 bg-background text-sm text-primary"
@@ -384,6 +389,7 @@ export default function Partner() {
                       Proposal / Engagement Type
                     </label>
                     <select
+                      name="Proposal / Engagement Type"
                       value={engagementType}
                       onChange={(e) => setEngagementType(e.target.value)}
                       className="w-full p-3 rounded-xl border border-surface-variant focus:border-secondary focus:ring-2 focus:ring-secondary/20 bg-background text-sm text-primary"
@@ -402,6 +408,7 @@ export default function Partner() {
                       Estimated Budget / Grant
                     </label>
                     <select
+                      name="Estimated Budget / Grant"
                       value={estimatedBudget}
                       onChange={(e) => setEstimatedBudget(e.target.value)}
                       className="w-full p-3 rounded-xl border border-surface-variant focus:border-secondary focus:ring-2 focus:ring-secondary/20 bg-background text-sm text-primary"
@@ -414,58 +421,68 @@ export default function Partner() {
                   </div>
                 </div>
 
-                {/* Drag and Drop File Upload Attachment */}
+                {/* File Upload Attachment Input (Separated from action buttons) */}
                 <div>
                   <label className="block text-xs font-semibold text-primary mb-1">
                     Attach Proposal / Concept Note / Deck (PDF or DOCX, max 5MB)
                   </label>
-                  <div
-                    onDragOver={handleDragOver}
-                    onDragLeave={handleDragLeave}
-                    onDrop={handleDrop}
-                    className={`border-2 border-dashed rounded-xl p-6 text-center transition-all bg-background cursor-pointer ${
-                      isDragging
-                        ? 'border-secondary bg-secondary/5 ring-2 ring-secondary/20'
-                        : 'border-surface-variant hover:border-secondary/60'
-                    }`}
-                  >
-                    <input
-                      type="file"
-                      id="proposalFile"
-                      accept=".pdf,.doc,.docx"
-                      onChange={handleFileChange}
-                      className="hidden"
-                    />
-                    <label htmlFor="proposalFile" className="cursor-pointer flex flex-col items-center">
-                      <span className="material-symbols-outlined text-3xl text-secondary mb-2">upload_file</span>
-                      {attachment ? (
-                        <div className="flex items-center gap-3 bg-surface-container-low px-4 py-2 rounded-lg border border-surface-variant">
-                          <span className="material-symbols-outlined text-emerald-600 text-lg">check_circle</span>
-                          <div className="text-left text-xs">
-                            <p className="font-semibold text-primary">{attachment.name}</p>
-                            <p className="text-on-surface-variant">{(attachment.size / (1024 * 1024)).toFixed(2)} MB</p>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={handleRemoveFile}
-                            className="p-1 rounded hover:bg-surface-variant text-red-600 ml-2 cursor-pointer"
-                            title="Remove attachment"
-                          >
-                            <span className="material-symbols-outlined text-base">close</span>
-                          </button>
+
+                  {/* Hidden Native File Input */}
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    id="proposalFile"
+                    name="attachment"
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
+
+                  {attachment ? (
+                    <div className="p-4 rounded-xl border border-surface-variant bg-surface-container-low flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3 overflow-hidden">
+                        <span className="material-symbols-outlined text-emerald-600 text-2xl shrink-0">
+                          description
+                        </span>
+                        <div className="text-xs truncate">
+                          <p className="font-semibold text-primary truncate">{attachment.name}</p>
+                          <p className="text-on-surface-variant">
+                            {(attachment.size / (1024 * 1024)).toFixed(2)} MB • Ready for submission
+                          </p>
                         </div>
-                      ) : (
-                        <div>
-                          <span className="text-sm font-semibold text-primary hover:underline">
-                            Click to upload document
-                          </span>
-                          <span className="text-xs text-on-surface-variant block mt-1">
-                            or drag and drop proposal package here (.pdf, .docx, .doc)
-                          </span>
-                        </div>
-                      )}
-                    </label>
-                  </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={handleRemoveFile}
+                        className="px-3 py-1.5 rounded-lg border border-red-200 text-red-600 hover:bg-red-50 text-xs font-semibold flex items-center gap-1 shrink-0 cursor-pointer transition-colors"
+                      >
+                        <span className="material-symbols-outlined text-sm">delete</span>
+                        Remove File
+                      </button>
+                    </div>
+                  ) : (
+                    <div
+                      onDragOver={handleDragOver}
+                      onDragLeave={handleDragLeave}
+                      onDrop={handleDrop}
+                      onClick={() => fileInputRef.current?.click()}
+                      className={`border-2 border-dashed rounded-xl p-6 text-center transition-all bg-background cursor-pointer ${
+                        isDragging
+                          ? 'border-secondary bg-secondary/5 ring-2 ring-secondary/20'
+                          : 'border-surface-variant hover:border-secondary/60'
+                      }`}
+                    >
+                      <div className="flex flex-col items-center pointer-events-none">
+                        <span className="material-symbols-outlined text-3xl text-secondary mb-2">upload_file</span>
+                        <span className="text-sm font-semibold text-primary">
+                          Click to upload proposal document
+                        </span>
+                        <span className="text-xs text-on-surface-variant block mt-1">
+                          or drag and drop here (.pdf, .docx, .doc, max 5MB)
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Scope of Work */}
@@ -474,6 +491,7 @@ export default function Partner() {
                     Executive Summary / Scope of Work *
                   </label>
                   <textarea
+                    name="Executive Summary / Scope of Work"
                     required
                     rows="4"
                     placeholder="Briefly describe the program objectives, intended health indicators, target demographic, and timeline..."

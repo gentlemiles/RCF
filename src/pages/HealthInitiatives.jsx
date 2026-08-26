@@ -62,7 +62,7 @@ export default function HealthInitiatives() {
         </div>
       </section>
 
-      {/* Verified Health Metricsn Banner */}
+      {/* Verified Health Metrics Banner */}
       <section className="bg-primary px-margin-mobile md:px-margin-desktop py-12 text-white">
         <div className="max-w-container-max mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/20">
           {data?.stats?.map((stat, idx) => (
