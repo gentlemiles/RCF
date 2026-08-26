@@ -1,14 +1,10 @@
 import React, { useState, useRef } from 'react';
-import { Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import partnerData from '../content/pages/partner.json';
 
 export default function Partner() {
   const data = partnerData || {};
-  const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
   const fileInputRef = useRef(null);
-
-  const isSubmitted = searchParams.get('submitted') === 'true';
 
   // Controlled Component States
   const [organizationName, setOrganizationName] = useState('');
@@ -24,6 +20,7 @@ export default function Partner() {
 
   // UI States
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isDragging, setIsDragging] = useState(false);
 
@@ -112,7 +109,6 @@ export default function Partner() {
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       const file = e.dataTransfer.files[0];
       handleValidateAndSetFile(file);
-      // Synchronize file into the actual input element
       if (fileInputRef.current && typeof DataTransfer !== 'undefined') {
         const dt = new DataTransfer();
         dt.items.add(file);
@@ -130,27 +126,62 @@ export default function Partner() {
     }
   };
 
-  const handleClientValidation = (e) => {
+  // Direct Vercel / Hostinger SMTP Submission Handler
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setErrorMessage('');
-    if (!organizationName.trim() || !contactName.trim() || !workEmail.trim() || !executiveSummary.trim()) {
-      e.preventDefault();
-      setErrorMessage('Please complete all required fields marked with an asterisk (*).');
-      return false;
-    }
 
-    if (attachment && attachment.size > MAX_FILE_SIZE) {
-      e.preventDefault();
-      setErrorMessage('Attachment exceeds the 5MB maximum limit.');
-      return false;
+    if (!organizationName.trim() || !contactName.trim() || !workEmail.trim() || !executiveSummary.trim()) {
+      setErrorMessage('Please complete all required fields marked with an asterisk (*).');
+      return;
     }
 
     setIsSubmitting(true);
-    return true;
+
+    try {
+      const formData = new FormData();
+      formData.append('Organization Name', organizationName);
+      formData.append('Organization Type', organizationType);
+      formData.append('Lead Contact Name', contactName);
+      formData.append('Title / Designation', designation);
+      formData.append('Official Work Email', workEmail);
+      formData.append('Target Geographic Region', targetRegion);
+      formData.append('Proposal Type', engagementType);
+      formData.append('Estimated Budget / Grant', estimatedBudget);
+      formData.append('Executive Summary', executiveSummary);
+
+      if (attachment) {
+        formData.append('attachment', attachment);
+      }
+
+      const response = await fetch('https://netlify-cms-github-oauth-provider-rho.vercel.app/api/send-proposal', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setIsSuccess(true);
+        setOrganizationName('');
+        setContactName('');
+        setDesignation('');
+        setWorkEmail('');
+        setAttachment(null);
+        setExecutiveSummary('');
+      } else {
+        setErrorMessage(result.message || 'Failed to submit proposal. Please verify your connection or email info@ronniecarefoundation.com directly.');
+      }
+    } catch (err) {
+      setErrorMessage('Network error. Please try again or email info@ronniecarefoundation.com directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleResetSuccess = () => {
-    setSearchParams({});
-    navigate('/partner', { replace: true });
+    setIsSuccess(false);
+    setErrorMessage('');
   };
 
   return (
@@ -225,7 +256,7 @@ export default function Partner() {
               </p>
             </div>
 
-            {isSubmitted ? (
+            {isSuccess ? (
               <div className="py-12 text-center flex flex-col items-center gap-4 animate-fadeIn">
                 <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center shadow-inner">
                   <span className="material-symbols-outlined text-3xl">verified</span>
@@ -237,7 +268,7 @@ export default function Partner() {
                     Thank you for reaching out!
                   </p>
                   <p>
-                    Our executive operations board has received your institutional submission and will review the package within 48 business hours. A confirmation has been routed to <strong>info@ronniecarefoundation.com</strong>.
+                    Our executive operations board has received your institutional submission via our secure SMTP gateway and will review the proposal within 48 business hours. A confirmation has been routed to <strong>info@ronniecarefoundation.com</strong>.
                   </p>
                 </div>
                 <div className="p-4 bg-surface-container-low rounded-xl border border-surface-variant text-xs text-on-surface-variant mt-2">
@@ -252,28 +283,7 @@ export default function Partner() {
                 </button>
               </div>
             ) : (
-              <form
-                action="https://formsubmit.co/info@ronniecarefoundation.com"
-                method="POST"
-                encType="multipart/form-data"
-                onSubmit={handleClientValidation}
-                className="space-y-6"
-              >
-                {/* FormSubmit System Hidden Controls */}
-                <input
-                  type="hidden"
-                  name="_subject"
-                  value={`[Partnership Proposal] ${organizationName || 'New Entity'} - ${engagementType}`}
-                />
-                <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_replyto" value={workEmail} />
-                <input
-                  type="hidden"
-                  name="_next"
-                  value={typeof window !== 'undefined' ? `${window.location.origin}/partner?submitted=true` : ''}
-                />
-                <input type="hidden" name="_captcha" value="false" />
-
+              <form onSubmit={handleSubmit} className="space-y-6">
                 {errorMessage && (
                   <div className="p-4 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl flex items-center gap-3 animate-fadeIn">
                     <span className="material-symbols-outlined text-red-600">error</span>
@@ -289,7 +299,6 @@ export default function Partner() {
                     </label>
                     <input
                       type="text"
-                      name="Organization Name"
                       required
                       placeholder="e.g., Global Health Fund / Acme Corp CSR"
                       value={organizationName}
@@ -303,7 +312,6 @@ export default function Partner() {
                       Organization Type *
                     </label>
                     <select
-                      name="Organization Type"
                       value={organizationType}
                       onChange={(e) => setOrganizationType(e.target.value)}
                       className="w-full p-3 rounded-xl border border-surface-variant focus:border-secondary focus:ring-2 focus:ring-secondary/20 bg-background text-sm text-primary"
@@ -325,7 +333,6 @@ export default function Partner() {
                     </label>
                     <input
                       type="text"
-                      name="Lead Contact Name"
                       required
                       placeholder="Full name"
                       value={contactName}
@@ -340,7 +347,6 @@ export default function Partner() {
                     </label>
                     <input
                       type="text"
-                      name="Title / Designation"
                       required
                       placeholder="e.g., Director of Partnerships"
                       value={designation}
@@ -355,7 +361,6 @@ export default function Partner() {
                     </label>
                     <input
                       type="email"
-                      name="email"
                       required
                       placeholder="name@organization.org"
                       value={workEmail}
@@ -372,7 +377,6 @@ export default function Partner() {
                       Target Geographic Region
                     </label>
                     <select
-                      name="Target Geographic Region"
                       value={targetRegion}
                       onChange={(e) => setTargetRegion(e.target.value)}
                       className="w-full p-3 rounded-xl border border-surface-variant focus:border-secondary focus:ring-2 focus:ring-secondary/20 bg-background text-sm text-primary"
@@ -389,7 +393,6 @@ export default function Partner() {
                       Proposal / Engagement Type
                     </label>
                     <select
-                      name="Proposal / Engagement Type"
                       value={engagementType}
                       onChange={(e) => setEngagementType(e.target.value)}
                       className="w-full p-3 rounded-xl border border-surface-variant focus:border-secondary focus:ring-2 focus:ring-secondary/20 bg-background text-sm text-primary"
@@ -408,7 +411,6 @@ export default function Partner() {
                       Estimated Budget / Grant
                     </label>
                     <select
-                      name="Estimated Budget / Grant"
                       value={estimatedBudget}
                       onChange={(e) => setEstimatedBudget(e.target.value)}
                       className="w-full p-3 rounded-xl border border-surface-variant focus:border-secondary focus:ring-2 focus:ring-secondary/20 bg-background text-sm text-primary"
@@ -421,7 +423,7 @@ export default function Partner() {
                   </div>
                 </div>
 
-                {/* File Upload Attachment Input (Separated from action buttons) */}
+                {/* Drag and Drop File Upload Attachment Input */}
                 <div>
                   <label className="block text-xs font-semibold text-primary mb-1">
                     Attach Proposal / Concept Note / Deck (PDF or DOCX, max 5MB)
@@ -432,7 +434,6 @@ export default function Partner() {
                     ref={fileInputRef}
                     type="file"
                     id="proposalFile"
-                    name="attachment"
                     accept=".pdf,.doc,.docx"
                     onChange={handleFileChange}
                     className="hidden"
@@ -447,7 +448,7 @@ export default function Partner() {
                         <div className="text-xs truncate">
                           <p className="font-semibold text-primary truncate">{attachment.name}</p>
                           <p className="text-on-surface-variant">
-                            {(attachment.size / (1024 * 1024)).toFixed(2)} MB • Ready for submission
+                            {(attachment.size / (1024 * 1024)).toFixed(2)} MB • Attached
                           </p>
                         </div>
                       </div>
@@ -491,7 +492,6 @@ export default function Partner() {
                     Executive Summary / Scope of Work *
                   </label>
                   <textarea
-                    name="Executive Summary / Scope of Work"
                     required
                     rows="4"
                     placeholder="Briefly describe the program objectives, intended health indicators, target demographic, and timeline..."
