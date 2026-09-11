@@ -3,7 +3,7 @@
   "header_subtitle": "On-the-ground impact reports from our health outreaches, community screenings, and diagnostic interventions across Nigeria.",
   "featured_story": {
     "title": "Cancer Awareness Month 2026: 600+ Women Screened with POWA",
-    "category": "Oncology Screening",
+    "category": "Medical Care",
     "date": "February 2026",
     "summary": "In collaborative partnership with the Police Officers Wives Association (POWA), Ronnie Care Foundation conducted comprehensive tumor marker screenings and breast & cervical cancer evaluations for over 600 women.",
     "image": "/images/uploads/_dsc2388.jpg"
@@ -11,38 +11,44 @@
   "stories": [
     {
       "title": "Project ERADICATION of Silent Killers at Durumi IDP Camp",
-      "category": "IDP Outreach",
+      "category": "Field Report",
       "date": "June 2022",
       "summary": "Joint medical outreach with the Youth Leadership Initiative for Social Justice (YLISJ). Provided free obstetrics scans to 18 pregnant women, clinical consultations, and pharmaceutical drug dispensation to over 140 women and children.",
       "image": "/images/uploads/whatsapp-image-2026-08-25-at-22.21.47.jpeg"
     },
     {
       "title": "World Malaria Day: Drug & Net Distribution in Karimo & Idu",
-      "category": "Infectious Diseases",
+      "category": "Field Report",
       "date": "April 2023",
       "summary": "Distributed essential medications and long-lasting insecticidal nets to over 200 families in Karimo Village following the 'Walk Against Malaria' campaign, which also funded relief for neighboring Idu community.",
       "image": "/images/uploads/whatsapp-image-2026-08-25-at-22.21.48.jpeg"
     },
     {
       "title": "Subsidized Fertility Workup & Reproductive Health Campaign",
-      "category": "Maternal & Fertility",
+      "category": "Success Story",
       "date": "November 2021",
       "summary": "Partnered with Ronnie Diagnostic Center to deliver over ₦1,760,000 worth of fertility screenings, providing 90%-discounted full workups and free pelvic ultrasound scans to couples trying to conceive.",
       "image": "/images/uploads/eradication-of-silent-killer-2-.jpeg"
     },
     {
       "title": "Breast Cancer Awareness Talk & Screening at Adron Homes",
-      "category": "Cancer Awareness",
+      "category": "Success Story",
       "date": "October 2021",
       "summary": "Interactive sensitization seminar and clinical screening sessions for men and women, featuring a live discussion with the foundation's breast cancer survivor ambassador.",
       "image": "/images/uploads/img_5916.jpg.jpg"
     },
     {
       "title": "International Women's Day 2022: Rural Reproductive Health",
-      "category": "Women's Health",
+      "category": "Medical Care",
       "date": "March 2022",
       "summary": "Community-driven sexual and reproductive healthcare outreach, focusing on family planning access, health education, and fostering local healthcare ownership in rural settlements.",
       "image": "/images/uploads/abd_2983.jpg"
+    },
+    {
+      "title": "Summer Career Discovery & Coaching Camp  2026",
+      "category": "Success Story",
+      "date": "August 2026",
+      "summary": "Ronnie Care Foundation International successfully concluded its Summer Career Discovery & Skill Acquisition Camp 2026, a 4-week structured development initiative tailored for primary and secondary school students from both public and private backgrounds. Operating for 6 hours daily over 20 session days, the camp was designed to bridge critical gaps in youth self-awareness, career literacy, technical and soft skill acquisition, basic entrepreneurship, and foundational academic learning."
     }
   ]
 }
