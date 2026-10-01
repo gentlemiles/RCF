@@ -93,7 +93,7 @@ export default function Donate() {
     reference: (new Date()).getTime().toString(),
     email: donorInfo.email || 'donor@ronniecare.org',
     amount: Math.round(parseFloat(finalAmount || 1000) * 100), // converted to kobo/cents
-    publicKey: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || 'pk_test_89ac33f2869d0bf57be9391a3b6ccd4f0c0b22a6',
+    publicKey: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY || 'pk_live_3e6e5bdbce22d33b900163a57e83c498b3437fd4',
     currency: currency,
     metadata: {
       custom_fields: [
