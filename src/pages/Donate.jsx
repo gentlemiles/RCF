@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams, Link } from 'react-router-dom';
 import { usePaystackPayment } from 'react-paystack';
 import donateData from '../content/pages/donate.json';
 
 export default function Donate() {
   const data = donateData || {};
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [transactionRef, setTransactionRef] = useState('');
   const [step, setStep] = useState(1);
   const [frequency, setFrequency] = useState('one-time');
   const [currency, setCurrency] = useState('NGN');
@@ -103,17 +105,27 @@ export default function Donate() {
     }
   };
 
+  // URL Query Detection Hook on component mount / redirect
+  useEffect(() => {
+    const ref = searchParams.get('reference') || searchParams.get('trxref');
+    if (ref) {
+      setTransactionRef(ref);
+      setIsSuccess(true);
+      // Clean up URL without triggering a page reload
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, [searchParams]);
+
   const initializePaystack = usePaystackPayment(paystackConfig);
 
-  const handlePaystackPayment = () => {
-    initializePaystack(
-      (reference) => {
-        setIsSuccess(true);
-      },
-      () => {
-        // Modal closed by user
-      }
-    );
+  const handlePaystackSuccess = (reference) => {
+    const refCode = reference.reference || reference.trxref || `RCF-${Date.now()}`;
+    setTransactionRef(refCode);
+    setIsSuccess(true);
+  };
+
+  const handlePaystackClose = () => {
+    console.log('Payment modal closed');
   };
 
   // Manual Transfer Receipt Submission Handler
@@ -641,17 +653,20 @@ export default function Donate() {
                         <button
                           type="button"
                           onClick={() => setStep(2)}
-                          className="w-1/3 py-3.5 rounded-xl border border-primary text-primary font-semibold hover:bg-primary/5 transition-all text-sm"
+                          className="w-1/3 py-4 rounded-xl border border-primary text-primary font-semibold hover:bg-primary/5 transition-all text-sm cursor-pointer"
                         >
                           Back
                         </button>
                         <button
                           type="button"
-                          onClick={handlePaystackPayment}
-                          className="w-2/3 py-3.5 rounded-xl bg-secondary text-white font-label-sm font-bold hover:opacity-90 active:scale-[0.99] transition-all text-sm shadow-md flex items-center justify-center gap-2"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            initializePaystack(handlePaystackSuccess, handlePaystackClose);
+                          }}
+                          className="w-full py-4 rounded-xl bg-secondary text-white font-label-sm font-bold text-base hover:opacity-90 active:scale-[0.99] transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer"
                         >
+                          <span>Complete Donation with Paystack</span>
                           <span className="material-symbols-outlined text-sm">lock</span>
-                          Pay with Paystack ({currencySymbols[currency]}{parseInt(finalAmount || 0).toLocaleString()})
                         </button>
                       </div>
                     </div>
@@ -838,8 +853,8 @@ export default function Donate() {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-on-surface-variant">Reference / Status:</span>
-                      <span className="font-mono font-bold text-emerald-700">
-                        {paymentMethod === 'paystack' ? `PAY-${paystackConfig.reference.slice(-8)}` : 'Receipt Submitted for Verification'}
+                      <span className="font-mono font-bold text-primary">
+                        {transactionRef || `RCF-${Math.floor(100000 + Math.random() * 900000)}`}
                       </span>
                     </div>
                   </div>
@@ -852,13 +867,15 @@ export default function Donate() {
                       Explore Field Stories
                     </Link>
                     <button
+                      type="button"
                       onClick={() => {
                         setIsSuccess(false);
                         setReceiptFile(null);
                         setUploadError('');
+                        setTransactionRef('');
                         setStep(1);
                       }}
-                      className="px-6 py-2.5 rounded-lg bg-secondary text-white font-label-sm font-semibold hover:opacity-90"
+                      className="px-6 py-2.5 rounded-lg bg-secondary text-white font-label-sm font-semibold hover:opacity-90 cursor-pointer"
                     >
                       Make Another Gift
                     </button>
